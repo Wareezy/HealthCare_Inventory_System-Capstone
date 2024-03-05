@@ -1,5 +1,6 @@
 import {pool} from '../config/config.js'
 
+// inventory
 const getInventories=async()=>{
     const [result]=await pool.query('SELECT * FROM inventory')
     return result
@@ -16,7 +17,7 @@ const getInventory=async(id)=>{
 const addInventory=async(productName, quantity, category, imgUrl, pricePerProduct, expenses, income)=>{
 
     await pool.query(`
-    INSERT INTO products (productName, quantity, category, imgUrl, pricePerProduct, expenses, income) values (?,?,?,?,?,?,?)`,
+    INSERT INTO inventory (productName, quantity, category, imgUrl, pricePerProduct, expenses, income) values (?,?,?,?,?,?,?)`,
    [productName, quantity, category, imgUrl, pricePerProduct, expenses, income]
     ) 
 }
