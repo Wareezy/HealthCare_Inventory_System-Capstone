@@ -1,24 +1,36 @@
 import{getUsers, getUser,addUser,deleteUser,editUser,checkUser} from '../model/users.js'
 import {auth} from '../middleware/authenticate.js'
 import bcrypt from 'bcrypt' 
-// import { auth } from './middleware/authenticate.js'
-// users data
+
  export default
  {
-    getUsers:async(req,res)=>{
+
+
+getUsers:async(req,res)=>{
     res.send( await getUsers())
 },
+
+
 getUser:async(req,res)=>{
     res.send(await getUser(+req.params.id))
 },
+
+
+
 // addUsers:async(req,res)=>{
 //     const { firstName,lastName,userRole,email,password} = req.body;
 //     const post = await addUser(firstName,lastName,userRole,email,password);
 //     res.send(await getUsers());  
 // },
+
+//this is used to login using users credentials
 loginUser: async (req, res) => {
-    res.send()
+    const {email,password}=req.body;
+    await checkUser(email,password)
+    res.send(res.msg)
 },
+
+
 // this is for the signup page
 creatUser:async(req,res)=>{
     const {firstName,lastName,userRole,email,password}=req.body
@@ -30,9 +42,12 @@ creatUser:async(req,res)=>{
         })  
      })
 },
+
+
 deleteUser:async(req,res)=>{
     res.send(await deleteUser(req.params.id))
 },
+
 editUser:async(req,res)=>{
   
     const [person]=await getUser(+req.params.id)
@@ -56,4 +71,14 @@ editUser:async(req,res)=>{
 
  
 }
+
+
+
+
+
+
+
+
+
+
 
