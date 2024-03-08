@@ -49,5 +49,7 @@ const checkUser=async (email)=>{
     return password
 }
 
+
 export{getUsers, getUser,addUser,deleteUser,editUser,checkUser}
+
 

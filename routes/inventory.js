@@ -1,5 +1,4 @@
 import express from 'express'
-
 import controller from '../controller/inventory.js'
 const router=express.Router()
 

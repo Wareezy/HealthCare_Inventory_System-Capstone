@@ -27,9 +27,9 @@ app.use(express.static('views'))
 app.use('/inventory',authenticate,inventoryRouter)
 app.use('/users',userRouter)
 app.use('/login',auth,loginRouter)
-app.use(authenticate)
-app.use(errorHandling)
-app.use(auth)
+// app.use(authenticate)
+// app.use(errorHandling)
+// app.use(auth)
 
 app.listen(PORT,()=>{
     console.log(`This is running on http://localhost:${PORT}`);

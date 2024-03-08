@@ -3,9 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Home</title>
 </head>
 <body>
-    <h1>SERVER PAGE</h1>
+    <H1>
+        Routes Information
+    </H1>
+    <h2>Home</h2>
+    <table>
+        <thead>
+            <th>Path</th>
+            <th>HTTP Methods</th>
+            <th>Description</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>/</td>
+                <td>GET</td>
+                <td>Home Page</td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- table for products -->
+    <h2>Inventory</h2>
+    <table>
+        <thead>
+            <th>Path</th>
+            <th>HTTP Methods</th>
+            <th>Description</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>/inventory</td>
+                <td>GET</td>
+                <td>Get all Inventory</td>
+            </tr>
+            <tr>
+                <td>/inventory/:id</td>
+                <td>GET</td>
+                <td>Get specific Inventory</td>
+            </tr>
+            <tr>
+                <td>/inventory</td>
+                <td>POST</td>
+                <td>Add new Inventory</td>
+            </tr>
+            <tr>
+                <td>/inventory/:id</td>
+                <td>Patch</td>
+                <td>Update a Inventory</td>
+            </tr>
+            <tr>
+                <td>/inventory/:id</td>
+                <td>DELETE</td>
+                <td>Delete a Inventory</td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- TABLE FOR USERS -->
+    <h2>Users</h2>
+    <table>
+        <thead>
+            <th>Path</th>
+            <th>HTTP Methods</th>
+            <th>Description</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>/users</td>
+                <td>GET</td>
+                <td>Get all Users</td>
+            </tr>
+            <tr>
+                <td>/users/:id</td>
+                <td>GET</td>
+                <td>Get specific User</td>
+            </tr>
+            <tr>
+                <td>/users</td>
+                <td>POST</td>
+                <td>Add A User</td>
+            </tr>
+            <tr>
+                <td>/users/:id</td>
+                <td>Patch</td>
+                <td>Update a User</td>
+            </tr>
+            <tr>
+                <td>/users/:id</td>
+                <td>DELETE</td>
+                <td>Delete a User</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
