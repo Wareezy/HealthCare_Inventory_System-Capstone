@@ -2,6 +2,7 @@ import express from 'express'
 import {config} from 'dotenv'
 import cors from 'cors'
 import { authenticate } from './middleware/authenticate.js'
+import { errorHandling } from './middleware/errorHandling.js'
 import { auth } from './middleware/authenticate.js'
 import inventoryRouter from './routes/inventory.js'
 import userRouter from './routes/users.js'
@@ -27,6 +28,7 @@ app.use('/inventory',authenticate,inventoryRouter)
 app.use('/users',userRouter)
 app.use('/login',auth,loginRouter)
 app.use(authenticate)
+app.use(errorHandling)
 app.use(auth)
 
 app.listen(PORT,()=>{

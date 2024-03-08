@@ -38,3 +38,4 @@ const editInventory=async(productName, quantity, category, imgUrl, pricePerProdu
 }
 
 export{getInventories,getInventory,addInventory,deleteInventory,editInventory}
+
