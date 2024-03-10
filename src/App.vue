@@ -1,21 +1,40 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <main>
+    <navBar/>  
+    <router-view/>
+
+   <footerComp/>
+  </main>
 </template>
 
+<script>
+import navBar from './components/navBar.vue';
+import footerComp from './components/footerComp.vue'
+
+export default{
+  components:{
+    navBar,
+    footerComp
+  }
+}
+</script>
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Avenir, Helvetica, Arial, sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: black;
+  font-family: arapey;
 }
 
-nav {
+body{
+  background-color:	rgb(	229, 229, 229)!important;
+  overflow-x: hidden; /* Add this line to remove horizontal scrolling */
+  margin: 0;
+    padding: 0;
+    }
+/* nav {
   padding: 30px;
 }
 
@@ -26,5 +45,5 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
-}
+} */
 </style>
