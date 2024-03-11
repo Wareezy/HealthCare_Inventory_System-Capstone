@@ -24,7 +24,7 @@ export default {
 <style>
 #footerID {
    position: absolute;
- margin-top:230px;
+ margin-top:250px;
  /* margin-top: 60px; */
    width: 100%; /* Full width */
    background-color: rgb(3,168,158); 

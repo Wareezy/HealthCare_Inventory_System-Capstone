@@ -11,11 +11,11 @@
           </div>
           <div>
             <div class="d-flex justify-content-center">
-              <router-link to="/products">
+              <router-link to="/login">
                 <button id="buttonLogin" class="align-item-center">Login</button>
               </router-link>
 
-              <router-link to="/products">
+              <router-link to="/signup">
                 <button id="buttonSignUp" class="align-item-center">SignUp</button>
               </router-link>
             </div>
@@ -55,7 +55,8 @@ export default {
 }
 
 #buttonLogin:hover {
-  background-color: 	rgb(3,168,158)
+  background-color: 	rgb(3,168,158);
+  color:white;
 }
 
 #buttonSignUp {
@@ -74,7 +75,8 @@ export default {
 }
 
 #buttonSignUp:hover {
-  background-color: 	rgb(3,168,158)
+  background-color: 	rgb(3,168,158);
+  color:white
 }
 
 #homeImg {
