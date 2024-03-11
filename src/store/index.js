@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import axios from 'axios'
 const BASE_URL="https://healthcare-inventory-system-capstone.onrender.com"
 
 export default createStore({
