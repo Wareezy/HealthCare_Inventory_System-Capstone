@@ -150,7 +150,7 @@ async loginUser({ commit }, currentUser) {
     let { data } = await axios.post(BASE_URL + '/login', currentUser);
 
     if (data.token) {
-      // $cookies.set('jwt', data.token);
+      $cookies.set('jwt', data.token);
       alert(data.msg);
       await router.push('/admin');
       window.location.reload();
@@ -159,7 +159,7 @@ async loginUser({ commit }, currentUser) {
     }
   } catch (error) {
     console.error('Cannot login', error);
-    // $cookies.remove('jwt');
+    $cookies.remove('jwt');
   }
 }
 
