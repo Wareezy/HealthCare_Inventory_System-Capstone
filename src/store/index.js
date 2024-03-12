@@ -131,8 +131,17 @@ async updateUser({commit},update){
   console.error('cannot update a single user',error)
 }
 
-}
+},
 
+async registerData({commit},addUser){
+
+  console.log(addUser);
+  let {data}= await axios.post(BASE_URL + '/users',addUser)
+  alert(data.msg)
+
+  window.location.reload()
+
+}
 
   },
   modules: {
