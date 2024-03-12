@@ -74,7 +74,11 @@ export default {
       getInventories() {
           return this.$store.dispatch('getInventories')
       }
+,
+addInventory(){
+    this.$store.dispatch('addInventory',this.$data)
 
+}
       ,
       logOut(){
         this.$store.dispatch('logOut')

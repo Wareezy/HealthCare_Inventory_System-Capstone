@@ -1,6 +1,8 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 import router from '@/router'
+import Swal from 'sweetalert2'
+import sweet from 'sweetalert'
 const BASE_URL="https://healthcare-inventory-system-capstone.onrender.com"
 axios.defaults.withCredentials=true
 export default createStore({
@@ -100,13 +102,33 @@ async addUser({commit},newUser){
     let {data}=await axios.post(BASE_URL + '/users' , newUser);
     console.log(data);
     commit('setUsers',data);
+    Swal.fire({
+          title: 'Added Successful',
+          text: 'User has been added successfully!',
+          icon: 'success',
+          timer: 3000,
+          showConfirmButton: false
+        });
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
   }
   catch(error)
   {
-    console.error('Cannot get single user',error)
+    Swal.fire({
+      title: 'Error',
+      text: 'Failed to add user',
+      icon: 'error',
+      timer: 3000
+    });
+    
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
 
   }
-  window.location.reload()
+  // window.location.reload()
 },
 
 async delUser({commit},id){
@@ -151,11 +173,32 @@ async loginUser({ commit }, currentUser) {
 
     if (data.token) {
       $cookies.set('jwt', data.token);
-      alert(data.msg);
+      // alert(data.msg);
       await router.push('/admin');
-      window.location.reload();
+      Swal.fire({
+        title: 'Login Successful',
+        text: 'User has logged in successfully!',
+        icon: 'success',
+        timer: 2000,
+        showConfirmButton: false
+      });
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+      // window.location.reload();
     } else {
-      alert('Invalid email or password');
+      Swal.fire({
+        title: 'Error',
+        text: 'Failed to login',
+        icon: 'error',
+        timer: 2000
+      });
+      
+      setTimeout(() => {
+         window.location.reload();
+      }, 3000);
+
     }
   } catch (error) {
     console.error('Cannot login', error);
@@ -169,8 +212,20 @@ async logOut(context){
   let cookies=$cookies.keys()
   console.log(cookies)
   $cookies.remove('jwt')
-  await router.push('/login')   
-  window.location.reload()
+  await router.push('/login')  
+  
+  Swal.fire({
+    title: 'Logout Successful',
+    text: 'User has logged out successfully!',
+    icon: 'success',
+    timer: 2000,
+    showConfirmButton: false
+  });
+
+  setTimeout(() => {
+    window.location.reload();
+  }, 3000);
+  // window.location.reload()
 }
   },
   modules: {
