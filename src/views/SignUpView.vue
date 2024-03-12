@@ -35,7 +35,7 @@
       required
       v-model="password"
       >
-      <button @click="registerData" class="action-button">Register</button>
+      <button @click="addUser" class="action-button">Register</button>
     </div>
 </template>
 <script>
@@ -53,17 +53,12 @@ export default {
     },
 
     computed:{
-        registerData(){
-            console.log(this.$data.firstName)
-            console.log(this.$data.lastName)
-            console.log(this.$data.userRole)
-            console.log(this.$data.email)
-            console.log(this.$data.password)
-            this.$store.dispatch('registerData',this.$data)
-        }
-    }
+     addUser(){
+      this.$store.dispatch('addUser',this.$data)
+     }
     
-}
+}}
+
 </script>
 <style lang="">
     

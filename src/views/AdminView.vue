@@ -1,5 +1,5 @@
 <template>
-    
+   <button v-if="$cookies.get('jwt')" id="logoutButton" @click="logOut">Log Out</button> 
   <h1 id="adminH">WELCOME TO ADMIN</h1>
 
   <div id="inputInventory" class="input-container">
@@ -74,6 +74,11 @@ export default {
       getInventories() {
           return this.$store.dispatch('getInventories')
       }
+
+      ,
+      logOut(){
+        this.$store.dispatch('logOut')
+      }
   },
 
   mounted() {
@@ -107,6 +112,12 @@ export default {
 }
 #addButton {
     margin-top: 100px;
+    border-radius: 12px;
+}
+#logoutButton {
+    background-color:red;
+    margin-top: 60px;
+    margin-right:-1350px;
     border-radius: 12px;
 }
 #addButton2 {

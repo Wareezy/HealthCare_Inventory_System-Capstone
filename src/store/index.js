@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
+import router from '@/router'
 const BASE_URL="https://healthcare-inventory-system-capstone.onrender.com"
 axios.defaults.withCredentials=true
 export default createStore({
@@ -105,6 +106,7 @@ async addUser({commit},newUser){
     console.error('Cannot get single user',error)
 
   }
+  window.location.reload()
 },
 
 async delUser({commit},id){
@@ -133,16 +135,43 @@ async updateUser({commit},update){
 
 },
 
-async registerData({commit},register){
+// async registerData({commit},register){
 
-  // console.log(addUser);
-  let {data}= await axios.post(BASE_URL + '/users',register)
-  alert(data.msg)
+//   // console.log(addUser);
+//   let {data}= await axios.post(BASE_URL + '/users',register)
+//   alert(data.msg)
 
-  window.location.reload()
+//   window.location.reload()
 
+// }
+
+async loginUser({ commit }, currentUser) {
+  try {
+    let { data } = await axios.post(BASE_URL + '/login', currentUser);
+
+    if (data.token) {
+      $cookies.set('jwt', data.token);
+      alert(data.msg);
+      await router.push('/admin');
+      window.location.reload();
+    } else {
+      alert('Invalid email or password');
+    }
+  } catch (error) {
+    console.error('Cannot login', error);
+    $cookies.remove('jwt');
+  }
 }
 
+,
+
+async logOut(context){
+  let cookies=$cookies.keys()
+  console.log(cookies)
+  $cookies.remove('jwt')
+  await router.push('/login')   
+  window.location.reload()
+}
   },
   modules: {
   }
