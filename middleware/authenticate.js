@@ -14,12 +14,12 @@ const auth=async(req,res,next)=>{
         if(err) throw err
         if(result === true){
             
-            // const {email}=req.body
+            const {email}=req.body
 
-            // const token=jwt.sign({email:email},process.env.SECRET_KEY,{expiresIn:'1h'})
-            // res.cookie('token', token, { httpOnly: false, expiresIn:'1h'})
+            const token=jwt.sign({email:email},process.env.SECRET_KEY,{expiresIn:'1h'})
+            res.cookie('token', token, { httpOnly: false, expiresIn:'1h'})
             res.send({
-                // token:token,
+                token:token,
                 msg:'i have logged in!!! YAY!!!'
             })
             next()
