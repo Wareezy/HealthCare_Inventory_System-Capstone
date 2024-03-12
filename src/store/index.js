@@ -1,7 +1,7 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 const BASE_URL="https://healthcare-inventory-system-capstone.onrender.com"
-
+axios.defaults.withCredentials=true
 export default createStore({
   state: {
     inventory:[],
@@ -133,10 +133,10 @@ async updateUser({commit},update){
 
 },
 
-async registerData({commit},addUser){
+async registerData({commit},register){
 
-  console.log(addUser);
-  let {data}= await axios.post(BASE_URL + '/users',addUser)
+  // console.log(addUser);
+  let {data}= await axios.post(BASE_URL + '/users',register)
   alert(data.msg)
 
   window.location.reload()
