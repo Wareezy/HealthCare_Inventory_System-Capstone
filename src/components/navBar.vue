@@ -21,7 +21,7 @@
                             <a class="nav-link" href="/about">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link"     href="/login">Login</a>
+                            <a class="nav-link"    v-if="!$cookies.get('jwt')"  href="/login">Login</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/signup">SignUp</a>
@@ -29,9 +29,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/products">Products</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin">Admin</a>
-                        </li>
+                        <li class="nav-item" v-if="$cookies.get('jwt')">
+    <a class="nav-link" href="/admin">Admin</a>
+</li>
                         <li class="nav-item">
                             <a class="nav-link" href="/contact">Contact</a>
                         </li>
