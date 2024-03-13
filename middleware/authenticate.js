@@ -2,25 +2,27 @@ import {config} from 'dotenv'
 import bcrypt from 'bcrypt'
 import cookieParser from 'cookie-parser'
 import jwt from 'jsonwebtoken'
-import { checkUser } from '../model/users.js'
+import { checkUser ,getProfile} from '../model/users.js'
 
 config()
 
 const auth=async(req,res,next)=>{
     const {password,email}=req.body
     const hashedPassword=await checkUser(email)
-    bcrypt.compare(password,hashedPassword,(err,result)=>{
+    bcrypt.compare(password,hashedPassword,async(err,result)=>{
 
         if(err) throw err
         if(result === true){
-            
-            const {email}=req.body
+            let currentUser=await getProfile(email)
+            console.log(currentUser)
+            // const {email}=req.body
 
             const token=jwt.sign({email:email},process.env.SECRET_KEY,{expiresIn:'1h'})
             res.cookie('token', token, { httpOnly: false, expiresIn:'1h'})
             res.send({
                 token:token,
-                msg:'i have logged in!!! YAY!!!'
+                msg:'i have logged in!!! YAY!!!',
+                user:currentUser
             })
             next()
         }else{

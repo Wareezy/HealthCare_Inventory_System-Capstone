@@ -16,6 +16,15 @@ const getUser=async(id)=>{
     return person
 }
 
+const getProfile=async(email)=>{
+    const[[person]]=await pool.query(
+        'SELECT * FROM users WHERE email=?',
+        [email]
+    )
+    return person
+}
+console.log(await getProfile('warrenjaftha16@gmail.com'))
+
 //add user into the user table
 const addUser=async(firstName,lastName,userRole,email,password)=>{
     await pool.query(`
@@ -50,6 +59,6 @@ const checkUser=async (email)=>{
 }
 
 
-export{getUsers, getUser,addUser,deleteUser,editUser,checkUser}
+export{getUsers, getUser,addUser,deleteUser,editUser,checkUser,getProfile}
 
 
