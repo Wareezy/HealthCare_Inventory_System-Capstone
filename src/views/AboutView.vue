@@ -1,30 +1,27 @@
 <template>
-  <div class="about container-fluid">
-    <div class="row">
-      <div class="col-md-6 offset-md-3">
-        <div>
-          <h2 id="aboutHeading" class="display-4 mt-4 mb-4 text-center">ABOUT</h2>
-        </div>
-        <div>
-          <h5 id="aboutHeading2" class="display-7">What is our business goal</h5>
-          <p>Our business goal is to provide our customers with the best quality inventory management system for thier business that they will be both satisfied with the look and the feel of the system </p>
-        </div>
-        <div>
-          <h5 id="aboutHeading3" class="display-7">What is our business mission</h5>
-          <p>Ultimately our business goal is to go global and establish different branches all over South Africa so that hospitals from all over the country can have access to our excellent inventory management systems</p>
-        </div>
-        <div>
-          <h5 id="aboutHeading4" class="display-7">What is our business vision</h5>
-          <p>Our business vision is help the community as well as local healthcare centers with managing their healthcare supplies to make their lives and jobs a little easier</p>
-        </div>
-      </div>
-      <div class="col-md-6 order-md-2 d-flex justify-content-center">
-        <div class="text-center">
-          <!-- <img id="homeGirl" src="https://i.ibb.co/q5KNX7N/animegirl-removebg-preview.png" class="img-fluid bigger-image"> -->
+   <div class="container mt-5">
+    <div class="glowing-bg">
+      <div id="aboutCard" class="card p-3 rounded-lg shadow">
+        <h1 id="aboutHeader" class="text-center mb-2">ABOUT</h1>
+        <div class="card-body">
+          <div>
+            <h5 id="aboutHeading2" class="display-7">What is our business goal</h5>
+            <p>Our business goal is to provide our customers with the best quality inventory management system for their business that they will be both satisfied with the look and the feel of the system</p>
+          </div>
+          <div>
+            <h5 id="aboutHeading3" class="display-7">What is our business mission</h5>
+            <p>Ultimately our business goal is to go global and establish different branches all over South Africa so that hospitals from all over the country can have access to our excellent inventory management systems</p>
+          </div>
+          <div>
+            <h5 id="aboutHeading4" class="display-7">What is our business vision</h5>
+            <p>Our business vision is to help the community as well as local healthcare centers with managing their healthcare supplies to make their lives and jobs a little easier</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+
 <div id="sliderImage"> 
   <div id="carouselExampleIndicators" class="carousel slide">
   <div class="carousel-inner">
@@ -58,6 +55,15 @@ export default {
 </script>
 
 <style>
+@keyframes glowing {
+    0% { box-shadow: 0 0 10px rgb(3,168,158); }
+    50% { box-shadow: 0 0 20px rgb(3,168,158); }
+    100% { box-shadow: 0 0 10px rgb(3,168,158); }
+  }
+
+  .glowing-bg {
+    animation: glowing 2s infinite alternate;
+  }
 #sliderImage{
   margin-top:150px;
 }

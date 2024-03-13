@@ -45,6 +45,13 @@
   </script>
   
   <style scoped>
+  .card {
+    transition: transform 0.3s;
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+  }
   #cardImg {
     height: 300px;
     width: 300px;

@@ -31,7 +31,17 @@ export default createStore({
       commit('setInventory',data);
     }
     catch(error){
-   console.error('Cannot add products',error)
+      Swal.fire({
+        title: 'Error',
+        text: 'Failed to retrieve inventory',
+        icon: 'error',
+        timer: 3000
+      });
+      
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+  
     }
       
     },
@@ -40,13 +50,36 @@ export default createStore({
       let {data}=await axios.post(BASE_URL + '/inventory',newInventory);
       console.log(data);
       commit("setInventory",data)
+      Swal.fire({
+        title: 'Added Successful',
+        text: 'Product has been added successfully!',
+        icon: 'success',
+        timer: 3000,
+        showConfirmButton: false
+      });
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     }
     catch(error)
     
     {
-      console.error('Cannot add the item',error)
-       } 
-       window.location.reload()
+      Swal.fire({
+        title: 'Error',
+        text: 'Failed to inventory user',
+        icon: 'error',
+        timer: 3000
+      });
+      
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+  
+       
+    
+    } 
+      //  window.location.reload()
     
     },
     async getInventory({commit},id){
@@ -62,23 +95,62 @@ export default createStore({
     async delInventory({commit},id){
       try{
             await axios.delete(BASE_URL + '/inventory/' + id)
+            Swal.fire({
+              title: 'Product Deleted Successful',
+              text: 'Product has been deleted successfully!',
+              icon: 'success',
+              timer: 3000,
+              showConfirmButton: false
+            });
+      
+            setTimeout(() => {
+              window.location.reload();
+            }, 3000);
       }
       catch(error){
-        console.error('Cannot delete a product',error)
-
+        Swal.fire({
+          title: 'Error',
+          text: 'Failed to delete product',
+          icon: 'error',
+          timer: 3000
+        });
+        
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       }
-      window.location.reload()
+      // window.location.reload()
     },
     async updateInventory({commit},update){
       try{
         await axios.patch(BASE_URL + '/inventory/' + update.id,update)
+        Swal.fire({
+          title: 'Product updated Successful',
+          text: 'Product has been updated successfully!',
+          icon: 'success',
+          timer: 3000,
+          showConfirmButton: false
+        });
+  
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       }
       catch(error)
       {
-        console.error('Cannot update the product',error)
+        Swal.fire({
+          title: 'Error',
+          text: 'Failed to update product',
+          icon: 'error',
+          timer: 3000
+        });
+        
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
 
       }
-      window.location.reload()
+      // window.location.reload()
     },
 
 
@@ -90,9 +162,19 @@ async getUsers({commit})
       let {data}=await axios.get(BASE_URL + '/users')
   console.log(data);
   commit('setUsers',data);
+
   }
   catch(error){
-    console.error('Cannot get users',error)
+    Swal.fire({
+      title: 'Error',
+      text: 'Failed to retrieve users',
+      icon: 'error',
+      timer: 3000
+    });
+    
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
   }
 
 },
@@ -179,20 +261,20 @@ async loginUser({ commit }, currentUser) {
         title: 'Login Successful',
         text: 'User has logged in successfully!',
         icon: 'success',
-        timer: 2000,
+        timer: 1000,
         showConfirmButton: false
       });
 
       setTimeout(() => {
         window.location.reload();
-      }, 3000);
+      }, 1000);
       // window.location.reload();
     } else {
       Swal.fire({
         title: 'Error',
         text: 'Failed to login',
         icon: 'error',
-        timer: 2000
+        timer: 1000
       });
       
       setTimeout(() => {
@@ -211,22 +293,34 @@ async loginUser({ commit }, currentUser) {
 async logOut(context){
   let cookies=$cookies.keys()
   console.log(cookies)
-  $cookies.remove('jwt')
-  await router.push('/login')  
+  // $cookies.remove('jwt')
+    
   
   Swal.fire({
-    title: 'Logout Successful',
-    text: 'User has logged out successfully!',
-    icon: 'success',
-    timer: 2000,
-    showConfirmButton: false
+    title: 'Are you sure?',
+    text: 'You will be logged out',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: 'rgb(71, 98, 218)',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, log me out!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Remove JWT token
+      $cookies.remove('jwt');
+      // Redirect to login page
+      router.push('/login');
+      setTimeout(()=>{
+          window.location.reload();
+      },10)
+    
+    } else {
+      // Reload the page if Cancel is clicked
+      window.location.reload();
+    }
   });
-
-  setTimeout(() => {
-    window.location.reload();
-  }, 3000);
-  // window.location.reload()
 }
+
   },
   modules: {
   }

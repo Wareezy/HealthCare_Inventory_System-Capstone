@@ -24,7 +24,7 @@
                             <a class="nav-link"    v-if="!$cookies.get('jwt')"  href="/login">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/signup">SignUp</a>
+                            <a class="nav-link" v-if="!$cookies.get('jwt')"  href="/signup">SignUp</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/products">Products</a>
@@ -35,6 +35,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/contact">Contact</a>
                         </li>
+                        
                     </ul>
                 </div>
             </div>

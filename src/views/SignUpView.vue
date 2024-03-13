@@ -62,17 +62,13 @@ export default {
         }
     },
 
-    computed:{
+    methods: {
+  async addUser() {
+    await this.$store.dispatch('addUser', this.$data);
+    this.$router.push('/login'); 
+  }
+}
 
-     addUser(){
-        
-        this.$store.dispatch('addUser',this.$data)
-        
-    }
-    
-
-
-    }
       
      }
     
