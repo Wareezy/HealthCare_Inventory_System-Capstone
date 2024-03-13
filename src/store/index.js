@@ -216,9 +216,29 @@ async addUser({commit},newUser){
 async delUser({commit},id){
   try{
     await axios.delete(BASE_URL + '/users/' + id)
+     Swal.fire({
+          title: 'Deleted Successful',
+          text: 'User has been deleted successfully!',
+          icon: 'success',
+          timer: 3000,
+          showConfirmButton: false
+        });
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
   }
   catch(error){
-    console.error('Cannot delete a single user',error)
+    Swal.fire({
+      title: 'Error',
+      text: 'Failed to delete user',
+      icon: 'error',
+      timer: 3000
+    });
+    
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
 
   }
 }
@@ -228,13 +248,33 @@ async delUser({commit},id){
 async updateUser({commit},update){
   try{
     await axios.patch(BASE_URL + '/users/' + update.id,update)
+    Swal.fire({
+      title: 'Update Successful',
+      text: 'User has been update successfully!',
+      icon: 'success',
+      timer: 3000,
+      showConfirmButton: false
+    });
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
 
   }
 
   catch(error)
 {
 
-  console.error('cannot update a single user',error)
+  Swal.fire({
+    title: 'Error',
+    text: 'Failed to update user',
+    icon: 'error',
+    timer: 3000
+  });
+  
+  setTimeout(() => {
+    window.location.reload();
+  }, 3000);
 }
 
 },

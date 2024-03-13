@@ -63,11 +63,11 @@
 
 
   <div id="inputUser" class="input-container">
-      <input type="text" placeholder="product.." v-model="firstName" class="form-control mb-3">
-      <input type="text" placeholder="quantity.. " v-model="lastName" class="form-control mb-3">
-      <input type="text" placeholder="category.." v-model="userRole" class="form-control mb-3">
-      <input type="text" placeholder="imageUrl.." v-model="email" class="form-control mb-3">
-      <input type="text" placeholder="price for product.." v-model="password" class="form-control mb-3">
+      <input type="text" placeholder="first Name" v-model="firstName" class="form-control mb-3">
+      <input type="text" placeholder="last Name " v-model="lastName" class="form-control mb-3">
+      <input type="text" placeholder="user Role" v-model="userRole" class="form-control mb-3">
+      <input type="text" placeholder="email" v-model="email" class="form-control mb-3">
+      <input type="text" placeholder="password" v-model="password" class="form-control mb-3">
   </div>
 
   <button id="addButton" @click="addUser">Add User</button>
@@ -104,8 +104,8 @@
                       <td>{{ person.userRole }}</td>
                       <td>{{ person.email }}</td>
                       <td>{{ person.password }}</td>
-                      <td><button id="buttonDel" @click="delInventory(item.id)">delete</button></td>
-                      <td><button id="buttonEdit" @click="updateInventory(item.id)">edit</button></td>
+                      <td><button id="buttonDel" @click="delUser(person.id)">delete</button></td>
+                      <td><button id="buttonEdit" @click="updateUser(person.id)">edit</button></td>
                   </tr>
               </tbody>
           </table>
@@ -165,6 +165,10 @@ this.$store.dispatch('addUser',this.$data)
     delInventory(id){
         this.$store.dispatch('delInventory',id)
     },
+    delUser(id){
+        this.$store.dispatch('delUser',id)
+
+    },
     updateInventory(id){
     let edit={
         id:id,
@@ -177,6 +181,19 @@ this.$store.dispatch('addUser',this.$data)
         income:this.income
     }
     this.$store.dispatch('updateInventory',edit)
+}
+
+,
+updateUser(id){
+    let edit={
+        id:id,
+        firstName:this.firstName,
+        lastName:this.lastName,
+        userRole:this.userRole,
+        email:this.userRole,
+        password:this.password
+    }
+    this.$store.dispatch('updateUser',edit)
 }
   },
 
