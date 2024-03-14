@@ -12,9 +12,12 @@ router
 
 router
     .route('/:id')
-        .get(controller.getUser)
+        // .get(controller.getUser)
         .delete(controller.deleteUser)
         .patch(controller.editUser)
+router
+        .route('/:email')
+          .get(controller.getProfile)
 
 
 export default router

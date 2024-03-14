@@ -8,13 +8,13 @@ import bcrypt from 'bcrypt'
 }
 
 //get unique user data
-const getUser=async(id)=>{
-    const[person]=await pool.query(
-        'SELECT * FROM users WHERE id=?',
-        [id]
-    )
-    return person
-}
+// const getUser=async(id)=>{
+//     const[person]=await pool.query(
+//         'SELECT * FROM users WHERE id=?',
+//         [id]
+//     )
+//     return person
+// }
 
 const getProfile=async(email)=>{
     const[[person]]=await pool.query(
@@ -23,7 +23,7 @@ const getProfile=async(email)=>{
     )
     return person
 }
-console.log(await getProfile('warrenjaftha16@gmail.com'))
+// console.log(await getProfile('warrenjaftha16@gmail.com'))
 
 //add user into the user table
 const addUser=async(firstName,lastName,userRole,email,password)=>{
@@ -59,6 +59,6 @@ const checkUser=async (email)=>{
 }
 
 
-export{getUsers, getUser,addUser,deleteUser,editUser,checkUser,getProfile}
+export{getUsers,addUser,deleteUser,editUser,checkUser,getProfile}
 
 

@@ -1,4 +1,4 @@
-import{getUsers, getUser,addUser,deleteUser,editUser,checkUser} from '../model/users.js'
+import{getUsers,addUser,deleteUser,editUser,checkUser,getProfile} from '../model/users.js'
 import {auth} from '../middleware/authenticate.js'
 import bcrypt from 'bcrypt' 
 
@@ -13,6 +13,10 @@ getUsers:async(req,res)=>{
 
 getUser:async(req,res)=>{
     res.send(await getUser(+req.params.id))
+},
+getProfile:async(req,res)=>{
+    const {email}=req.body;
+    res.send(await getProfile(email))
 },
 
 
