@@ -32,6 +32,9 @@
                         <li class="nav-item" v-if="$cookies.get('jwt')">
     <a class="nav-link" href="/admin">Admin</a>
 </li>
+<li class="nav-item" v-if="$cookies.get('jwt')">
+    <a class="nav-link" href="/profile">Profile</a>
+</li>
                         <li class="nav-item">
                             <a class="nav-link" href="/contact">Contact</a>
                         </li>
