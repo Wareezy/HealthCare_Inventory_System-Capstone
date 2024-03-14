@@ -60,14 +60,14 @@ export default {
 },
 
 computed:{
-    getUser(email){
-        return this.$store.dispatch('getUser',email)
+    getProfile(){
+        return this.$store.dispatch('getProfile',this.email)
     }
 
 },
 
 mounted(){
-    this.getUser
+    this.getProfile
 }
 
 }

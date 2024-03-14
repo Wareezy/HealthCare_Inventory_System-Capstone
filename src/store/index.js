@@ -179,6 +179,31 @@ async getUsers({commit})
 
 },
 
+async getProfile({commit},profile)
+{
+
+  try{
+      let {data}=await axios.get(BASE_URL + '/users/' +profile.email,profile )
+  console.log(data);
+  commit('setUsers',data);
+
+  }
+  catch(error){
+    Swal.fire({
+      title: 'Error',
+      text: 'Failed to retrieve users',
+      icon: 'error',
+      timer: 3000
+    });
+    
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
+  }
+
+},
+
+
 async addUser({commit},newUser){
   try{
     let {data}=await axios.post(BASE_URL + '/users' , newUser);
