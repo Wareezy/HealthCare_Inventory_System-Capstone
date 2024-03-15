@@ -5,7 +5,7 @@
   <div id="inputInventory" class="input-container">
       <input type="text" placeholder="product.." v-model="productName" class="form-control mb-3">
       <input type="number" placeholder="quantity.. " v-model="quantity" class="form-control mb-3">
-      <select name="userRole" v-model="userRole" class="form-control mb-3 glowing-input">
+      <select name="category" v-model="category" class="form-control mb-3 glowing-input">
                 <option value="" disabled selected>Select category</option>
                 <option value="admin">cardiovascular</option>
                 <option value="user">pain</option>
@@ -194,19 +194,18 @@ this.$store.dispatch('addUser',this.$data)
     }
     this.$store.dispatch('updateInventory',edit)
 }
-
 ,
 updateUser(id){
     // made changes to the edit and played around with it
-    let edit={
+    let change={
         id:id,
         firstName:this.firstName,
         lastName:this.lastName,
         userRole:this.userRole,
-        email:this.userRole,
+        email:this.email,
         password:this.password
     }
-    this.$store.dispatch('updateUser',edit)
+    this.$store.dispatch('updateUser',change)
 }
   },
 
