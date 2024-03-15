@@ -82,14 +82,14 @@ export default createStore({
       //  window.location.reload()
     
     },
-    async getInventory({commit},id){
-      try{
-        await axios.get(BASE_URL + '/inventory/' + id)
+    async getInventory({ commit }, id) {
+      try {
+        let { data } = await axios.get(BASE_URL + '/inventory/' + id);
+        // Update the inventory state with the fetched product
+        commit('setInventory', data);
+      } catch (error) {
+        console.error('Cannot get the single product', error);
       }
-      catch(error){
-        console.error('Cannot get the single product',error)
-      }
-     
     },
 
     async delInventory({commit},id){
