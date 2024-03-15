@@ -7,6 +7,7 @@ const BASE_URL="https://healthcare-inventory-system-capstone.onrender.com"
 axios.defaults.withCredentials=true
 export default createStore({
   state: {
+    // this is the store
     inventory:[],
     users:[]
   },
