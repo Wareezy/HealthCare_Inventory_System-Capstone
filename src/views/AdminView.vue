@@ -176,6 +176,7 @@ this.$store.dispatch('addUser',this.$data)
     delInventory(id){
         this.$store.dispatch('delInventory',id)
     },
+    // was experiencing errors with my delete i made changes and fixed it
     delUser(id){
         this.$store.dispatch('delUser',id)
 
@@ -196,6 +197,7 @@ this.$store.dispatch('addUser',this.$data)
 
 ,
 updateUser(id){
+    // made changes to the edit and played around with it
     let edit={
         id:id,
         firstName:this.firstName,
@@ -239,7 +241,8 @@ updateUser(id){
     margin-left: 30px;
 }
 #inputUser{
-    margin-left: 30px;
+    /* position: absolute !important; */
+    margin-left: 340px !important;
 }
     
 
