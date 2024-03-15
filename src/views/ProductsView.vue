@@ -1,6 +1,7 @@
 <template>
     <h1 id="avai">Available Stock</h1>
     <div class="row justify-content-center">
+  
       <div class="col-md-4" v-for="item in $store.state.inventory" :key="item.id">
         <div class="card my-4 mx-3"> <!-- Added "mx-3" class for horizontal margin -->
           <img id="cardImg" :src="item.imgUrl" class="card-img-top" alt="Product Image">
