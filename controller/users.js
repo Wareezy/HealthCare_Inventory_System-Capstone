@@ -1,4 +1,4 @@
-import{getUsers,addUser,deleteUser,editUser,checkUser,getProfile} from '../model/users.js'
+import{getUsers,getUser,addUser,deleteUser,editUser,checkUser,getProfile} from '../model/users.js'
 import {auth} from '../middleware/authenticate.js'
 import bcrypt from 'bcrypt' 
 
