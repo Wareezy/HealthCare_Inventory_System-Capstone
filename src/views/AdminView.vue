@@ -112,6 +112,17 @@
       </div>
   </div>
 
+<div id="downSection"> 
+    <h1 id="downButton">
+      Download Business Report
+    </h1>
+    <a :href>
+    <button>
+        DOWNLOAD
+    </button>
+</a>
+</div>
+ 
 </template>
 
 <script>
@@ -208,7 +219,9 @@ updateUser(id){
 
 
 <style>
-
+#downButton{
+    margin-top:100px;
+}
 @media (max-width: 768px) {
     #inputInventory input {
         width: calc(100% - 20px) !important; 
