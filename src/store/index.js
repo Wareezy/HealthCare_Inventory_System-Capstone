@@ -89,7 +89,7 @@ export default createStore({
       catch(error){
         console.error('Cannot get the single product',error)
       }
-      window.location.reload()
+     
     },
 
     async delInventory({commit},id){

@@ -22,7 +22,7 @@
       </div>
     </div>
     <div v-else>
-      <spinnerComponent></spinnerComponent>
+<h1>There is nothing</h1>
     </div>
 
     </div>
@@ -42,17 +42,18 @@ data(){
 }
 ,
     computed:{
-getUser(id){
-this.$store.dispatch('getUser',id)
+getInventory(){
+return this.$store.dispatch('getInventory',this.$route.params.id)
     }
     },
 
     mounted(){
-        this.getUser
+        this.getInventory
     }
     
 }
 </script>
 <style>
-    
+
+
 </style>
