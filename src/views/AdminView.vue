@@ -5,12 +5,12 @@
   <div id="inputInventory" class="input-container">
       <input type="text" placeholder="product.." v-model="productName" class="form-control mb-3">
       <input type="number" placeholder="quantity.. " v-model="quantity" class="form-control mb-3">
-      <select name="category" v-model="category" class="form-control mb-3 glowing-input">
-                <option value="" disabled selected>Select category</option>
-                <option value="admin">cardiovascular</option>
-                <option value="user">pain</option>
-                <option value="user">antibiotics</option>
-            </select>
+      <select name="" v-model="category" class="form-control mb-3 glowing-input">
+        <option value="" disabled selected>SELECT CATEGORY</option>
+        <option value="cardiovascular">Cardiovascular</option>
+        <option value="pain">Pain</option>
+        <option value="antibiotics">Antibiotics</option>
+</select>
       <input type="text" placeholder="imageUrl.." v-model="imgUrl" class="form-control mb-3">
       <input type="text" placeholder="price for product.." v-model="pricePerProduct" class="form-control mb-3">
       <input type="text" placeholder="expenses.." v-model="expenses" class="form-control mb-3">
