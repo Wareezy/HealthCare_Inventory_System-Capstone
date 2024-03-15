@@ -64,7 +64,6 @@ export default createStore({
       }, 3000);
     }
     catch(error)
-    
     {
       Swal.fire({
         title: 'Error',
