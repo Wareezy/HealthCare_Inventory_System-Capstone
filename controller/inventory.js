@@ -1,6 +1,6 @@
 import{getInventories,getInventory,addInventory,deleteInventory,editInventory} from '../model/inventory.js'
 
-
+// just changing the adding product routes
 export default{
     getInvents:async(req,res)=>{
         res.send( await getInventories())
