@@ -21,18 +21,18 @@
                             <a class="nav-link" href="/about">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link"    v-if="!$cookies.get('jwt')"  href="/login">Login</a>
+                            <a class="nav-link"    v-if="!$cookies.get('token')"  href="/login">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" v-if="!$cookies.get('jwt')"  href="/signup">SignUp</a>
+                            <a class="nav-link" v-if="!$cookies.get('token')"  href="/signup">SignUp</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/products">Products</a>
                         </li>
-                        <li class="nav-item" v-if="$cookies.get('jwt')">
+                        <li class="nav-item" v-if="$cookies.get('token')">
     <a class="nav-link" href="/admin">Admin</a>
 </li>
-<li class="nav-item" v-if="$cookies.get('jwt')">
+<li class="nav-item" v-if="$cookies.get('token')">
     <a class="nav-link" href="/profile">Profile</a>
 </li>
                         <li class="nav-item">

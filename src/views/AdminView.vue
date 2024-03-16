@@ -1,5 +1,5 @@
 <template>
-   <button v-if="$cookies.get('jwt')" id="logoutButton" @click="logOut">Log Out</button> 
+   <button v-if="$cookies.get('token')" id="logoutButton" @click="logOut">Log Out</button> 
   <h1 id="adminH">WELCOME TO ADMIN</h1>
 
   <div id="inputInventory" class="input-container">
