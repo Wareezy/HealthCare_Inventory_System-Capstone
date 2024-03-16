@@ -1,4 +1,5 @@
 <template>
+  <!-- doing edits on the profile page -->
   <h1 id="avai">User</h1>
     <div class="row justify-content-center">
         <div class="col-md-4">
