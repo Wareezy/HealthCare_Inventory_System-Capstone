@@ -1,75 +1,35 @@
 <template>
-    <div>
-        <div id="inputUser" class="input-container">
-      <input type="text" placeholder="first Name" v-model="firstName" class="form-control mb-3">
-      <input type="text" placeholder="last Name " v-model="lastName" class="form-control mb-3">
-      <input type="text" placeholder="user Role" v-model="userRole" class="form-control mb-3">
-      <input type="text" placeholder="email" v-model="email" class="form-control mb-3">
-      <input type="text" placeholder="password" v-model="password" class="form-control mb-3">
-  </div>
-
-
-  <div class="container">
-      <!-- Add Product Section -->
-      <div class="input-container">
-          <!-- Input fields for adding products -->
-      </div>
-      <!-- Products Table -->
-      <h2 id="adminUser">Users Table</h2>
-      <div class="table-responsive">
-          <table class="table ">
-              <thead id="head">
-                  <tr>
-                      <th>ID</th>
-                      <th>FIRSTNAME</th>
-                      <th>LASTNAME</th>
-                      <th>USERROLE</th>
-                      <th>EMAIL</th>
-                      <th>PASSWORD</th>
-                      <th></th>
-                      <th></th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr v-for="person in $store.state.users" :key="person.id">
-                      <td>{{ person.id }}</td>
-                      <td>{{ person.firstName }}</td>
-                      <td>{{ person.lastName}}</td>
-                      <td>{{ person.userRole }}</td>
-                      <td>{{ person.email }}</td>
-                      <td>{{ person.password }}</td>
-                      <td><button id="buttonEdit" @click="updateUser(person.id)">edit</button></td>
-                  </tr>
-              </tbody>
-          </table>
-      </div>
-  </div>
-    </div>
+<div v-if="getProfile">
+  <p>First Name: {{ userProfile.firstName }}</p>
+  <p>Last Name: {{ userProfile.lastName }}</p>
+  <p>User Role: {{ userProfile.userRole }}</p>
+  <p>Email: {{ userProfile.email }}</p>
+  <p>Password: {{ userProfile.password }}</p>
+</div>
+<div v-else>
+  <p>Loading...</p>
+</div>
 </template>
 <script>
 export default {
-    data(){
-    return{
-        firstName:'',
-        lastName:'',
-        userRole:'',
-        email:'',
-        password:''
+  data() {
+    return {
+      firstName: '',
+      lastName: '',
+      userRole: '',
+      email: '',
+      password: ''
     }
-
-},
-
-computed:{
-    getProfile(){
-        return this.$store.dispatch('getProfile',this.email)
+  },
+  computed: {
+    getProfile() {
+      return this.$store.state.users.length > 0 ? this.$store.state.users[0] : null;
     }
-
-},
-
-mounted(){
-    this.getProfile
-}
-
+  },
+  mounted() {
+    // Fetch the logged-in user's profile
+    this.$store.dispatch('getProfile', this.$cookies.get('email'));
+  }
 }
 </script>
 <style>
@@ -129,37 +89,37 @@ mounted(){
 
 .input-container input,
 .input-container select {
-  margin-right: 10px; /* Adjust the spacing between input fields */
-  margin-bottom: 10px; /* Adjust the vertical spacing between input fields */
+  margin-right: 10px; 
+  margin-bottom: 10px; 
 }
 
 .input-container {
     margin-top: 100px;
     margin-left: 210px;
     display: flex;
-    flex-wrap: wrap; /* Allow input fields to wrap */
+    flex-wrap: wrap; 
 }
 .input-container2 {
     margin-top: 100px;
-    margin-left: 120px; /* Assuming you wanted no left margin */
+    margin-left: 120px; 
     padding: 10px !important;
     display: flex;
 }
 .input-container2 input {
-    width: 150px !important; /* Adjust the width to your desired value */
-    margin-right: 10px; /* Adjust the space between input tags */
-    /* You can adjust other styles like padding, margin, etc. here */
+    width: 150px !important; 
+    margin-right: 10px; 
+ 
 }
 .input-container input {
-    margin-right: 10px; /* Adjust spacing between inputs */
+    margin-right: 10px; 
 }
 .form-control {
-    width: 200px !important; /* Adjust the width as needed */
+    width: 200px !important; 
 }
 #table {
     margin-top: 100px;
 }
-/* Style for the buttons */
+
 button {
     background-color: rgb(3, 168, 158);
     color: white;

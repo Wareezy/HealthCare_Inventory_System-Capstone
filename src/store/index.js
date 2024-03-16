@@ -179,28 +179,14 @@ async getUsers({commit})
 
 },
 
-async getProfile({commit},profile)
-{
-
-  try{
-      let {data}=await axios.get(BASE_URL + '/users/' +profile.email,profile )
-  console.log(data);
-  commit('setUsers',data);
-
+async getProfile({ commit }, email) {
+  try {
+    let { data } = await axios.get(BASE_URL + '/users/' + email);
+    console.log('Profile Data:', data); // Log fetched data
+    commit('setUsers', data);
+  } catch (error) {
+    console.error('Failed to retrieve user profile', error);
   }
-  catch(error){
-    Swal.fire({
-      title: 'Error',
-      text: 'Failed to retrieve users',
-      icon: 'error',
-      timer: 3000
-    });
-    
-    setTimeout(() => {
-      window.location.reload();
-    }, 3000);
-  }
-
 },
 
 
