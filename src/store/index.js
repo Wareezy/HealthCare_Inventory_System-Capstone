@@ -309,7 +309,7 @@ async loginUser({ commit }, currentUser) {
     let { data } = await axios.post(BASE_URL + '/login', currentUser);
 
     if (data.token) {
-      $cookies.set('jwt', data.token);
+      $cookies.set('token', data.token);
       // alert(data.msg);
       await router.push('/admin');
       Swal.fire({
@@ -339,10 +339,9 @@ async loginUser({ commit }, currentUser) {
     }
   } catch (error) {
     console.error('Cannot login', error);
-    $cookies.remove('jwt');
+    $cookies.remove('token');
   }
 }
-
 ,
 
 async logOut(context){
@@ -362,7 +361,7 @@ async logOut(context){
   }).then((result) => {
     if (result.isConfirmed) {
       // Remove JWT token
-      $cookies.remove('jwt');
+      $cookies.remove('token');
       // Redirect to login page
       router.push('/login');
       setTimeout(()=>{
