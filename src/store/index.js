@@ -30,9 +30,7 @@ export default createStore({
         let {data}=await axios.get(BASE_URL + '/inventory');
       console.log(data);
       commit('setInventory',data);
-      let encode = $cookies.get('jwt')
-        encode = encode.split('.')[1]
-        console.log(JSON.parse(window.atob(encode) ))
+    
     }
     catch(error){
       Swal.fire({
@@ -187,6 +185,9 @@ async getProfile({ commit }, email) {
     let { data } = await axios.get(BASE_URL + '/users/' + email);
     console.log('Profile Data:', data); // Log fetched data
     commit('setUsers', data);
+    let encode = $cookies.get('jwt')
+    encode = encode.split('.')[1]
+    console.log(JSON.parse(window.atob(encode) ))
   } catch (error) {
     console.error('Failed to retrieve user profile', error);
   }
