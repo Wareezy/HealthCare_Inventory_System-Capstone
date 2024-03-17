@@ -10,7 +10,8 @@ export default createStore({
   state: {
     // this is the store
     inventory:[],
-    users:[]
+    users:[],
+    currentUser:null,
   },
   getters: {
   },
@@ -20,6 +21,9 @@ export default createStore({
     },
     setUsers(state,data){
       state.users=data
+    },
+    setCurrentUser(state,data){
+      state.currentUser=data
     }
   },
   actions: {
@@ -183,12 +187,12 @@ async getUsers({commit})
 
 async getProfile({ commit }, email) {
   try {
-    let { data } = await axios.get(BASE_URL + '/users/' + email);
-    console.log('Profile Data:', data); // Log fetched data
-    commit('setUsers', data);
-    let encode = $cookies.get('token')
-    encode = encode.split('.')[1]
-    console.log(JSON.parse(window.atob(encode) ))
+    let encode = $cookies.get('token');
+    encode = encode.split('.')[1];
+    const decodedToken = JSON.parse(window.atob(encode));
+    console.log(decodedToken);
+    commit('setCurrentUser', decodedToken.currentUser); 
+    // Update the currentUser state
   } catch (error) {
     console.error('Failed to retrieve user profile', error);
   }
