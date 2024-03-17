@@ -63,18 +63,31 @@ editUser:async(req,res)=>{
     email ? email=email: {email}=person
     password ? password=password: {password}=person
 
-    bcrypt.hash(password,10,async (err,hash)=>{
-        if(err) throw err
-        await editUser(firstName,lastName,userRole,email,hash,+req.params.id)
-        res.send({
-            msg: "you have edited your account"
-        })  
-     })
+    if (password) {
+        // If present, hash the password
+        try {
+            password = await bcrypt.hash(password, 10);
+        } catch (error) {
+            console.error("Error hashing password:", error);
+            res.status(500).send({ error: "An error occurred while hashing the password" });
+            return;
+        }
+    } else {
+        // If not present, use the existing password from the database
+        password = person.password;
+    }
+
+    // Update user data in the database
+    await editUser(firstName, lastName, userRole, emailAdd, Password, +req.params.id);
+
+    // Return updated user data
+    res.send(await editUser());
+}
     // res.json(await getUsers())
  }
 
  
-}
+
 
 
 
