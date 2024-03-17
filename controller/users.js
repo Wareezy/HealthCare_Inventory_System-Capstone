@@ -54,40 +54,36 @@ deleteUser:async(req,res)=>{
 
 editUser:async(req,res)=>{
   
-    const [person]=await getUser(+req.params.id)
-    let {firstName,lastName,userRole,email,password}=req.body
+    try {
+        const [person] = await getUser(+req.params.id);
+        let { firstName, lastName, userRole, email, password } = req.body;
 
-    firstName ? firstName=firstName: {firstName}=person
-    lastName ? lastName=lastName: {lastName}=person
-    userRole ? userRole=userRole:{userRole}=person
-    email ? email=email: {email}=person
-    password ? password=password: {password}=person
+        // Update the fields if provided in the request body
+        firstName = firstName || person.firstName;
+        lastName = lastName || person.lastName;
+        userRole = userRole || person.userRole;
+        email = email || person.email;
 
-    if (password) {
-        // If present, hash the password
-        try {
-            password = await bcrypt.hash(password, 10);
-        } catch (error) {
-            console.error("Error hashing password:", error);
-            res.status(500).send({ error: "An error occurred while hashing the password" });
-            return;
+        // Check if password is provided and hash it
+        if (password) {
+            bcrypt.hash(password, 10, async (err, hash) => {
+                if (err) throw err;
+                await editUser(firstName, lastName, userRole, email, hash, +req.params.id);
+                res.send({ msg: "You have edited your account" });
+            });
+        } else {
+            // If password is not provided, update other fields without hashing the password
+            await editUser(firstName, lastName, userRole, email, person.password, +req.params.id);
+            res.send({ msg: "You have edited your account" });
         }
-    } else {
-        // If not present, use the existing password from the database
-        password = person.password;
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ error: "Internal server error" });
     }
-
-    // Update user data in the database
-    await editUser(firstName, lastName, userRole, emailAdd, Password, +req.params.id);
-
-    // Return updated user data
-    res.send(await editUser());
-}
-    // res.json(await getUsers())
  }
 
  
-
+}
 
 
 

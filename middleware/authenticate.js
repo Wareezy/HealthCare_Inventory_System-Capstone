@@ -9,12 +9,13 @@ config()
 const auth=async(req,res,next)=>{
     const {password,email}=req.body
     const hashedPassword=await checkUser(email)
+    console.log(hashedPassword)
     bcrypt.compare(password,hashedPassword,async(err,result)=>{
 
         if(err) throw err
         if(result === true){
             let currentUser=await getProfile(email)
-            console.log(currentUser)
+            // console.log(currentUser)
             // const {email}=req.body
 
             console.log(email,'This is above the token')
@@ -38,7 +39,7 @@ const authenticate=(req,res,next)=>{
     let {cookie}= req.headers
     let tokenInHeader = cookie && cookie.split('=')[1]
 
-    console.log(tokenInHeader);
+    // console.log(tokenInHeader);
 
     if(tokenInHeader===null) res.sendStatus(401)
 
