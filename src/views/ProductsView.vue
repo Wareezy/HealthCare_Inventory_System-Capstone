@@ -1,17 +1,26 @@
 <template>
-  <div>
+
     <h1 id="avai">Available Stock</h1>
+        <!-- Search input -->
+        <div class="container">
+  <!-- Search input, Category filter button, and Sort button -->
+  <div class="row justify-content-center">
+    <div class="col-md-4 col-sm-12">
+      <input type="text" v-model="searchQuery" placeholder="Search by product name" class="form-control mb-3 search-input">
+    </div>
+    <div class="col-md-2 col-sm-6">
+      <button id="filterID" class="btn btn-success btn-block mb-3" @click="toggleFilter">{{ filterButtonText }}</button>
+    </div>
+    <div class="col-md-2 col-sm-6">
+      <button id="sortID" class="btn btn-info btn-block mb-3" @click="toggleSort">{{ sortButtonText }}</button>
+    </div>
+  </div>
+</div>
+    <!-- Spinner component -->
+    <spinner-comp v-if="isLoading"></spinner-comp>
     
-    <!-- Search input -->
-    <input type="text" v-model="searchQuery" placeholder="Search by product name" class="form-control mb-3 search-input">
-    
-    <!-- Category filter button -->
-    <button class="btn btn-success mb-3 mr-3" @click="toggleFilter">{{ filterButtonText }}</button>
-    
-    <!-- Sort button -->
-    <button class="btn btn-info mb-3" @click="toggleSort">{{ sortButtonText }}</button>
-    
-    <div class="row justify-content-center">
+    <!-- Product cards -->
+    <div v-if="!isLoading" class="row justify-content-center">
       <div class="col-md-4" v-for="item in filteredInventory" :key="item.id">
         <router-link :to="{ name: 'product', params: { id: item.id } }" class="router-link">
           <div class="card my-4 mx-3">
@@ -26,16 +35,22 @@
         </router-link>
       </div>
     </div>
-  </div>
+
+
 </template>
 
 <script>
+import spinnerComp from '@/components/spinnerComp.vue';
 export default {
+  components:{
+    spinnerComp
+  },
   data() {
     return {
       searchQuery: '', // Data property to store the search query
       filterType: 'All', // Data property to store the selected category filter
-      sortAsc: true // Data property to store the sorting order
+      sortAsc: true, // Data property to store the sorting order
+      isLoading: true // Data property to indicate whether data is loading
     };
   },
   computed: {
@@ -104,7 +119,15 @@ export default {
     },
     // Fetch inventory when the component is mounted
     getInventories() {
-      this.$store.dispatch('getInventories');
+      this.isLoading = true; // Set isLoading to true before fetching data
+      this.$store.dispatch('getInventories')
+        .then(() => {
+          this.isLoading = false; // Set isLoading to false after data is fetched
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+          this.isLoading = false; // Ensure isLoading is set to false in case of error
+        });
     },
   },
   mounted() {
@@ -114,9 +137,32 @@ export default {
 </script>
 
 <style scoped>
+#inputsChanging{
+  /* margin-left:110px; */
+}
+#filterID{
+  background-color: rgb(3,168,158);
+  /* margin-left:130px; */
+  width:120px;
+  /* margin-top:100px */
+}
+
+#sortID{
+
+  /* margin-left:10px; */
+  background-color: rgb(3,168,158);
+  color:white;
+  /* margin-top:100px */
+
+
+}
+
 /* Your existing styles */
 .search-input {
-  width: 200px; /* Adjust width as needed */
+  /* position: absolute; */
+  width: 200px; 
+  margin-left:59px;
+  /*margin-top:100px; */
 }
 .router-link {
     text-decoration: none; /* Remove underline from router-link */

@@ -1,5 +1,5 @@
 <template>
-   <button v-if="$cookies.get('token')" id="logoutButton" @click="logOut">Log Out</button> 
+    <button v-if="$cookies.get('token')" id="logoutButton" @click="logOut" class="btn btn-danger btn-block mt-3">Log Out</button> 
   <h1 id="adminH">WELCOME TO ADMIN</h1>
 
   <div id="inputInventory" class="input-container">
@@ -65,7 +65,11 @@
   <div id="inputUser" class="input-container">
       <input type="text" placeholder="first Name" v-model="firstName" class="form-control mb-3">
       <input type="text" placeholder="last Name " v-model="lastName" class="form-control mb-3">
-      <input type="text" placeholder="user Role" v-model="userRole" class="form-control mb-3">
+      <select name="userRole" v-model="userRole" class="form-control mb-3 glowing-input">
+                <option value="" disabled selected>Select User Role</option>
+                <option value="admin">admin</option>
+                <option value="user">user</option>
+            </select>
       <input type="text" placeholder="email" v-model="email" class="form-control mb-3">
       <input type="text" placeholder="password" v-model="password" class="form-control mb-3">
   </div>
@@ -220,6 +224,13 @@ updateUser(id){
 
 
 <style>
+#inputUser {
+    margin-left: auto; /* Align to the right by default */
+    margin-right: auto; /* Align to the left by default */
+    width: 80%; /* Adjust the width as needed */
+    text-align: center; /* Center the input fields */
+}
+
 #downButton{
     margin-top:120px;
 }
@@ -232,24 +243,34 @@ updateUser(id){
     #inputUser input{
         width: calc(100% - 20px) !important; 
         margin: 0 10px 10px 0 !important; 
-        display: block; 
+        display: block !important; 
+    }
+}
+@media (max-width: 768px) {
+    #inputUser input {
+        display: block !important; /* Change display to block for smaller screens */
+        width: calc(100% - 20px) !important; /* Adjust width for smaller screens */
+        margin: 0 10px 10px 0 !important; /* Adjust margin for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    #inputUser {
+        margin-left: 10px; /* Move the input container to the left */
+        margin-right: 10px; /* Move the input container to the right */
     }
 }
 
 #inputInventory {
     margin-left: 30px;
 }
-#inputUser{
-    /* position: absolute !important; */
-    margin-left: 340px !important;
-}
-    
+  
 
 #head {
     background-color: rgb(3, 168, 158) !important ;
 }
 #adminH {
-    margin-top: 50px;
+    margin-top: 200px;
 }
 #adminProd {
     margin-top: 110px;
@@ -263,10 +284,19 @@ updateUser(id){
     border-radius: 12px;
 }
 #logoutButton {
-    background-color:red;
-    margin-top: 60px;
-    margin-right:-1350px;
+    background-color: red;
     border-radius: 12px;
+    margin-top: 60px !important;
+    margin-left: 1300px !important;
+    margin-right: auto !important;
+    transition: margin-left 0.3s ease; /* Smooth transition for margin changes */
+}
+
+@media (max-width: 1300px) {
+    #logoutButton {
+        margin-left: auto !important; /* Center the button when screen size is smaller */
+        margin-right: auto !important;
+    }
 }
 #addButton2 {
     margin-top: 100px;

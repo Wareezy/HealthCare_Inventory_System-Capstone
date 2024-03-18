@@ -73,7 +73,7 @@
           </div>
           <div class="col">
             <div class="contactForm">
-            <form id="formOfContact" action="https://formspree.io/f/mpzvrdre" method="POST" ref="form" @submit.prevent="submitForm">
+            <form id="formOfContact" action="https://formspree.io/f/mjvneyev" method="POST" ref="form" @submit.prevent="submitForm">
               <h2>Send Message</h2>
               <div class="inputBox">
                 <!-- validation is included by each field with a error message that gets displayed -->

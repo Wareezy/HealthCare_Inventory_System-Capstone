@@ -9,14 +9,24 @@
         <div>
           <h3 class="product-title">{{ inventory[0].productName }}</h3>
           <p class="product-info">
-            {{ inventory[0].quantity }} Kits Available
+            {{ inventory[0].quantity }} products Available
             <br>
             <br>
             {{ inventory[0].category }}
             <br>
-            <button class="btn btn-primary">
+            <div id="buttMove">   
+              <button class="btn btn-primary">
               <p class="money"> R{{ inventory[0].pricePerProduct }}</p>
             </button>
+            <router-link to="/products">
+              <button id ="backButton" class="btn btn-primary">
+                  Back
+            </button>
+          </router-link>
+        </div>
+         
+            
+
           </p>
         </div>
       </div>
@@ -40,8 +50,17 @@ export default {
 </script>
 
 <style>
+#buttMove{
+margin-top:40px;
+text-align: center !important;
+}
 .product-details-container {
   background-color: white; /* Set the background color to white */
   padding: 20px; 
+}
+#backButton{
+  width:100px;
+  height:53px;
+  margin-left:100px;
 }
 </style>

@@ -1,17 +1,22 @@
 <template>
   <div>
      <h1 id="avai">User</h1>
-     <div class="row justify-content-center">
+     <div class="row justify-content-center ">
        <div class="col-md-4">
-         <div class="card my-4 mx-3" v-if="userProfile"  :key="userProfile.currentUser.id">
+         <div class="card my-4 mx-3 glowing-bg" v-if="userProfile"  :key="userProfile.currentUser.id">
            <div class="card-body">
-             <h5 class="card-title">FIRSTNAME:{{ userProfile.currentUser.firstName }}</h5>
+            <div>
+              <div class="card-text"> <h5 class="card-title">FIRSTNAME:{{ userProfile.currentUser.firstName }}</h5>
              <h5 class="card-text">LASTNAME:{{ userProfile.currentUser.lastName }}</h5>
              <h5 class="card-text">YOUR ROLE IS A:{{ userProfile.currentUser.userRole }}</h5>
              <h5 class="card-text">EMAIL:{{ userProfile.currentUser.email }}</h5>
              <!-- Do not display the password -->
              <button id="buttonDel" @click="delUser(userProfile.currentUser.id)">Delete</button>
              <button id="buttonEdit" @click="updateUser(userProfile.currentUser.id)">Edit</button>
+            </div>
+            
+            </div>
+            
            </div>
          </div>
          <div v-else>
@@ -22,7 +27,11 @@
      <div id="inputUser" class="input-container">
       <input type="text" placeholder="first Name" v-model="firstName" class="form-control mb-3">
       <input type="text" placeholder="last Name " v-model="lastName" class="form-control mb-3">
-      <input type="text" placeholder="user Role" v-model="userRole" class="form-control mb-3">
+      <select name="userRole" v-model="userRole" class="form-control mb-3 glowing-input">
+                <option value="" disabled selected>Select User Role</option>
+                <option value="admin">admin</option>
+                <option value="user">user</option>
+            </select>
       <input type="text" placeholder="email" v-model="email" class="form-control mb-3">
       <input type="text" placeholder="password" v-model="password" class="form-control mb-3">
   </div>
@@ -84,7 +93,38 @@
 </script>
  
 <style>
+@keyframes glowing {
+    0% { box-shadow: 0 0 10px rgb(3,168,158); }
+    50% { box-shadow: 0 0 20px rgb(3,168,158); }
+    100% { box-shadow: 0 0 10px rgb(3,168,158); }
+  }
 
+  .glowing-bg {
+    animation: glowing 2s infinite alternate;
+  }
+.card-body {
+    position: relative;
+}
+
+.card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    box-shadow: 0 0 10px 3px rgba(3, 168, 158, 0.7);
+    animation: glow 2s ease-in-out infinite alternate; /* Adjust animation duration and timing as needed */
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 10px 3px rgba(3, 168, 158, 0.7);
+    }
+    to {
+        box-shadow: 0 0 20px 6px rgba(3, 168, 158, 0.7);
+    }
+}
 #downButton{
     margin-top:120px;
 }
@@ -98,15 +138,31 @@
     #inputUser input{
         width: calc(100% - 20px) !important; 
         margin: 0 10px 10px 0 !important; 
-        display: block; 
+        display: block !important; 
     }
 }
 #inputInventory {
-    margin-left: 30px;
+    margin-left: 30px !important;
 }
-#inputUser{
-    /* position: absolute !important; */
-    margin-left: 340px !important;
+#inputUser {
+    margin-left:auto;
+    margin-right: 50px;
+    width: 80%; /* Adjust the width as needed */
+    text-align: center; /* Center the input fields */
+}
+
+#inputUser input {
+    display: inline-block;
+    width: calc(25% - 10px); /* Adjust the width as needed */
+    margin-right: 10px; /* Adjust the spacing between input fields */
+}
+
+@media (max-width: 768px) {
+    #inputUser input {
+        display: block; /* Change display to block for smaller screens */
+        width: calc(100% - 20px); /* Adjust width for smaller screens */
+        margin: 0 10px 10px 0; /* Adjust margin for smaller screens */
+    }
 }
 #head {
     background-color: rgb(3, 168, 158) !important ;
