@@ -4,7 +4,7 @@
         <!-- Search input -->
         <div class="container">
   <!-- Search input, Category filter button, and Sort button -->
-  <div class="row justify-content-center">
+  <div class="row justify-content-center ">
     <div class="col-md-4 col-sm-12">
       <input type="text" v-model="searchQuery" placeholder="Search by product name" class="form-control mb-3 search-input">
     </div>
@@ -20,10 +20,10 @@
     <spinner-comp v-if="isLoading"></spinner-comp>
     
     <!-- Product cards -->
-    <div v-if="!isLoading" class="row justify-content-center">
+    <div v-if="!isLoading" class="row justify-content-center ">
       <div class="col-md-4" v-for="item in filteredInventory" :key="item.id">
         <router-link :to="{ name: 'product', params: { id: item.id } }" class="router-link">
-          <div class="card my-4 mx-3">
+          <div class="card my-4 mx-3 glowing-bg">
             <img id="cardImg" :src="item.imgUrl" class="card-img-top" alt="Product Image">
             <div class="card-body">
               <h5 class="card-title">{{ item.productName }}</h5>
@@ -47,10 +47,10 @@ export default {
   },
   data() {
     return {
-      searchQuery: '', // Data property to store the search query
-      filterType: 'All', // Data property to store the selected category filter
-      sortAsc: true, // Data property to store the sorting order
-      isLoading: true // Data property to indicate whether data is loading
+      searchQuery: '',
+      filterType: 'All', 
+      sortAsc: true, 
+      isLoading: true 
     };
   },
   computed: {
@@ -119,24 +119,34 @@ export default {
     },
     // Fetch inventory when the component is mounted
     getInventories() {
-      this.isLoading = true; // Set isLoading to true before fetching data
+      this.isLoading = true; 
       this.$store.dispatch('getInventories')
         .then(() => {
-          this.isLoading = false; // Set isLoading to false after data is fetched
+          this.isLoading = false;
         })
         .catch((error) => {
           console.error('Error fetching data:', error);
-          this.isLoading = false; // Ensure isLoading is set to false in case of error
+          this.isLoading = false;
         });
     },
   },
   mounted() {
-    this.getInventories(); // Fetch initial inventory data
+    this.getInventories(); 
   }
 };
 </script>
 
 <style scoped>
+
+@keyframes glowing {
+    0% { box-shadow: 0 0 10px rgb(3,168,158); }
+    50% { box-shadow: 0 0 20px rgb(3,168,158); }
+    100% { box-shadow: 0 0 10px rgb(3,168,158); }
+  }
+
+  .glowing-bg {
+    animation: glowing 2s infinite alternate;
+  }
 #inputsChanging{
   /* margin-left:110px; */
 }
@@ -157,7 +167,6 @@ export default {
 
 }
 
-/* Your existing styles */
 .search-input {
   /* position: absolute; */
   width: 200px; 
@@ -165,7 +174,7 @@ export default {
   /*margin-top:100px; */
 }
 .router-link {
-    text-decoration: none; /* Remove underline from router-link */
+    text-decoration: none; 
 }
 
 .card {
@@ -179,7 +188,7 @@ export default {
 #cardImg {
     height: 300px;
     width: 300px;
-    margin: 0 auto; /* Center the image horizontally */
+    margin: 0 auto; 
 }
 
 #avai {

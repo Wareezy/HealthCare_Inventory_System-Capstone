@@ -26,7 +26,7 @@ export default {
    position: absolute;
  margin-top:250px;
  /* margin-top: 60px; */
-   width: 100%; /* Full width */
+   width: 100%; 
    background-color: rgb(3,168,158); 
    z-index: 1;
 }

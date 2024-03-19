@@ -30,7 +30,7 @@ export default{
 
 body{
   background-color:	rgb(	229, 229, 229)!important;
-  overflow-x: hidden; /* Add this line to remove horizontal scrolling */
+  overflow-x: hidden; 
   margin: 0;
     padding: 0;
     }

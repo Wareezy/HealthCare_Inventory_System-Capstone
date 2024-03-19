@@ -1,98 +1,108 @@
 <template>
   <div>
-     <h1 id="avai">User</h1>
-     <div class="row justify-content-center ">
-       <div class="col-md-4">
-         <div class="card my-4 mx-3 glowing-bg" v-if="userProfile"  :key="userProfile.currentUser.id">
-           <div class="card-body">
+    <h1 id="userHead">User</h1>
+    <div class="row justify-content-center ">
+      <div class="col-md-4">
+        <div class="card my-4 mx-3 glowing-bg" v-if="!isLoading && userProfile" :key="userProfile.currentUser.id">
+          <div class="card-body">
             <div>
-              <div class="card-text"> <h5 class="card-title">FIRSTNAME:{{ userProfile.currentUser.firstName }}</h5>
-             <h5 class="card-text">LASTNAME:{{ userProfile.currentUser.lastName }}</h5>
-             <h5 class="card-text">YOUR ROLE IS A:{{ userProfile.currentUser.userRole }}</h5>
-             <h5 class="card-text">EMAIL:{{ userProfile.currentUser.email }}</h5>
-             <!-- Do not display the password -->
-             <button id="buttonDel" @click="delUser(userProfile.currentUser.id)">Delete</button>
-             <button id="buttonEdit" @click="updateUser(userProfile.currentUser.id)">Edit</button>
+              <div class="card-text">
+                <h5 class="card-title">Firstname:{{ userProfile.currentUser.firstName }}</h5>
+                <h5 class="card-text">Lastname:{{ userProfile.currentUser.lastName }}</h5>
+                <h5 class="card-text">Your role is a:{{ userProfile.currentUser.userRole }}</h5>
+                <h5 class="card-text">Email:{{ userProfile.currentUser.email }}</h5>
+                <!-- Do not display the password -->
+                <button id="buttonDel" @click="delUser(userProfile.currentUser.id)">Delete</button>
+                <button id="buttonEdit" @click="updateUser(userProfile.currentUser.id)">Edit</button>
+              </div>
             </div>
-            
-            </div>
-            
-           </div>
-         </div>
-         <div v-else>
-           <p>No user found</p>
-         </div>
-       </div>
-     </div>
-     <div id="inputUser" class="input-container">
+          </div>
+        </div>
+        <div v-else>
+          <spinnerComp v-if="isLoading"/>
+        </div>
+      </div>
+    </div>
+    <div id="inputUser" class="input-container">
       <input type="text" placeholder="first Name" v-model="firstName" class="form-control mb-3">
       <input type="text" placeholder="last Name " v-model="lastName" class="form-control mb-3">
       <select name="userRole" v-model="userRole" class="form-control mb-3 glowing-input">
-                <option value="" disabled selected>Select User Role</option>
-                <option value="admin">admin</option>
-                <option value="user">user</option>
-            </select>
+        <option value="" disabled selected>Select User Role</option>
+        <option value="admin">admin</option>
+        <option value="user">user</option>
+      </select>
       <input type="text" placeholder="email" v-model="email" class="form-control mb-3">
       <input type="text" placeholder="password" v-model="password" class="form-control mb-3">
-  </div>
-  </div>
- </template>
- 
- <script>
- export default {
+    </div>
+    </div>
+  
+</template>
+
+<script>
+import spinnerComp from '@/components/spinnerComp.vue';
+export default {
   components: {
-      // spinnerComponent
-    },
-    // Computed property to access currentUser state from Vuex store
-    computed: {
-      userProfile() {
-        return this.$store.state.currentUser;
-      },
-    },
-    // decode token and set user info on component 
-    mounted() {
-      this.decodeTokenAndSetUserInfo();
-    
-    },
-    // Method to decode JWT token and set user info in Vuex store
-    methods: {
-      decodeTokenAndSetUserInfo() {
-        // Retrieve token from cookies
-        let encode = $cookies.get('token');
-        if (encode) {
-          // Extract payload from JWT token
-          encode = encode.split('.')[1];
-          // Decode payload JSON
-          const decodedToken = JSON.parse(window.atob(encode));
-          console.log(decodedToken);
-          // Commit decoded token to Vuex store
-          this.$store.commit('setCurrentUser', decodedToken); 
-        }
-      },
-
-      delUser(id){
-        this.$store.dispatch('delUser',id) 
-        $cookies.remove('token'); 
-        this.$router.push('/login'); 
-      },
-
-  updateUser(id){
-    let change={
-        id:id,
-        firstName:this.firstName,
-        lastName:this.lastName,
-        userRole:this.userRole,
-        email:this.email,
-        password:this.password
+    spinnerComp
+  },
+  data() {
+    return {
+      isLoading: true
     }
-    this.$store.dispatch('updateUser',change);
-    this.$router.push('/login'); 
-}
-},
- };
+  },
+  computed: {
+    userProfile() {
+      return this.$store.state.currentUser;
+    },
+  },
+  created() {
+    // Set isLoading to false when the page has finished loading
+    window.addEventListener('load', () => {
+      this.isLoading = false;
+    });
+
+    // Simulate loading delay (replace with actual data fetching logic)
+    setTimeout(() => {
+      this.decodeTokenAndSetUserInfo();
+    }, 500); // Adjust delay as needed
+  },
+  methods: {
+    decodeTokenAndSetUserInfo() {
+      let encode = $cookies.get('token');
+      if (encode) {
+        encode = encode.split('.')[1];
+        const decodedToken = JSON.parse(window.atob(encode));
+        console.log(decodedToken);
+        this.$store.commit('setCurrentUser', decodedToken);
+        // Set isLoading to false once user profile data is loaded
+        this.isLoading = false;
+      }
+    },
+    delUser(id) {
+      this.$store.dispatch('delUser', id)
+      $cookies.remove('token');
+      this.$router.push('/login');
+    },
+    updateUser(id) {
+      let change = {
+        id: id,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        userRole: this.userRole,
+        email: this.email,
+        password: this.password
+      }
+      this.$store.dispatch('updateUser', change);
+      this.$router.push('/login');
+    }
+  },
+};
 </script>
  
 <style>
+#userHead{
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
 @keyframes glowing {
     0% { box-shadow: 0 0 10px rgb(3,168,158); }
     50% { box-shadow: 0 0 20px rgb(3,168,158); }
@@ -114,7 +124,7 @@
     height: 100%;
     border-radius: 12px;
     box-shadow: 0 0 10px 3px rgba(3, 168, 158, 0.7);
-    animation: glow 2s ease-in-out infinite alternate; /* Adjust animation duration and timing as needed */
+    animation: glow 2s ease-in-out infinite alternate; 
 }
 
 @keyframes glow {
@@ -147,21 +157,21 @@
 #inputUser {
     margin-left:auto;
     margin-right: 50px;
-    width: 80%; /* Adjust the width as needed */
-    text-align: center; /* Center the input fields */
+    width: 80%; 
+    text-align: center; 
 }
 
 #inputUser input {
     display: inline-block;
-    width: calc(25% - 10px); /* Adjust the width as needed */
-    margin-right: 10px; /* Adjust the spacing between input fields */
+    width: calc(25% - 10px); 
+    margin-right: 10px;
 }
 
 @media (max-width: 768px) {
     #inputUser input {
-        display: block; /* Change display to block for smaller screens */
-        width: calc(100% - 20px); /* Adjust width for smaller screens */
-        margin: 0 10px 10px 0; /* Adjust margin for smaller screens */
+        display: block; 
+        width: calc(100% - 20px); 
+        margin: 0 10px 10px 0; 
     }
 }
 #head {
@@ -199,37 +209,36 @@
 
 .input-container input,
 .input-container select {
-  margin-right: 10px; /* Adjust the spacing between input fields */
-  margin-bottom: 10px; /* Adjust the vertical spacing between input fields */
+  margin-right: 10px;
+  margin-bottom: 10px; 
 }
 
 .input-container {
     margin-top: 100px;
     margin-left: 210px;
     display: flex;
-    flex-wrap: wrap; /* Allow input fields to wrap */
+    flex-wrap: wrap; 
 }
 .input-container2 {
     margin-top: 100px;
-    margin-left: 120px; /* Assuming you wanted no left margin */
+    margin-left: 120px; 
     padding: 10px !important;
     display: flex;
 }
 .input-container2 input {
-    width: 150px !important; /* Adjust the width to your desired value */
-    margin-right: 10px; /* Adjust the space between input tags */
-    /* You can adjust other styles like padding, margin, etc. here */
+    width: 150px !important; 
+    margin-right: 10px; 
+
 }
 .input-container input {
-    margin-right: 10px; /* Adjust spacing between inputs */
+    margin-right: 10px; 
 }
 .form-control {
-    width: 200px !important; /* Adjust the width as needed */
+    width: 200px !important;
 }
 #table {
     margin-top: 100px;
 }
-/* Style for the buttons */
 button {
     background-color: rgb(3, 168, 158);
     color: white;

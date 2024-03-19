@@ -55,7 +55,7 @@ margin-top:40px;
 text-align: center !important;
 }
 .product-details-container {
-  background-color: white; /* Set the background color to white */
+  background-color: white; 
   padding: 20px; 
 }
 #backButton{

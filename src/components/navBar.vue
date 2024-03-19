@@ -67,7 +67,7 @@ export default {
       }
     
     nav a.router-link-active {
-      color: white;
+      color: white !important;
     }
     
       /* nav a:hover {

@@ -19,14 +19,12 @@
 
   <button id="addButton" @click="addInventory">Add products</button>
 
-  <div class="container">
-      <!-- Add Product Section -->
-      <div class="input-container">
-          <!-- Input fields for adding products -->
+  <spinnerComp v-if="loadingInventory"></spinnerComp>
+  <div class="container">     
+     <div class="input-container">
       </div>
-      <!-- Products Table -->
       <h2 id="adminProd">Products Table</h2>
-      <div class="table-responsive">
+      <div class="table-responsive" >
           <table class="table ">
               <thead id="head">
                   <tr>
@@ -79,6 +77,7 @@
 
 
 
+  <spinnerComp v-if="loadingUsers"></spinnerComp>
   <div class="container">
       <!-- Add Product Section -->
       <div class="input-container">
@@ -130,7 +129,13 @@
 </template>
 
 <script>
+import spinnerComp from '@/components/spinnerComp.vue';
+
 export default {
+components:{
+    spinnerComp
+  
+},
   data() {
       return {
           productName: '',
@@ -140,6 +145,8 @@ export default {
           pricePerProduct: '',
           expenses: '',
           income: '',
+          loadingInventory: false
+
       }
   },
   data(){
@@ -148,17 +155,29 @@ export default {
         lastName:'',
         userRole:'',
         email:'',
-        password:''
+        password:'',
+        loadingUsers: false
     }
   },
 computed: {
       getInventories()
     {
-          return this.$store.dispatch('getInventories')
+        this.loadingInventory = true; 
+
+          return this.$store.dispatch('getInventories').then(()=>{
+            this.loadingInventory = false; 
+        })
+
+          
+
       },
       getUsers()
       {
-this.$store.dispatch('getUsers')
+
+this.loadingUsers = true; 
+        return this.$store.dispatch('getUsers').then(() => {
+            this.loadingUsers = false; 
+        })
       },
 addInventory()
 {
@@ -180,7 +199,6 @@ this.$store.dispatch('addUser',this.$data)
     delInventory(id){
         this.$store.dispatch('delInventory',id)
     },
-    // was experiencing errors with my delete i made changes and fixed it
     delUser(id){
         this.$store.dispatch('delUser',id)
 
@@ -200,8 +218,7 @@ this.$store.dispatch('addUser',this.$data)
 }
 ,
 updateUser(id){
-    // made changes to the edit and played around with it
-    let change={
+        let change={
         id:id,
         firstName:this.firstName,
         lastName:this.lastName,
@@ -225,10 +242,10 @@ updateUser(id){
 
 <style>
 #inputUser {
-    margin-left: auto; /* Align to the right by default */
-    margin-right: auto; /* Align to the left by default */
-    width: 80%; /* Adjust the width as needed */
-    text-align: center; /* Center the input fields */
+    margin-left: auto; 
+    margin-right: auto; 
+    width: 80%;
+    text-align: center; 
 }
 
 #downButton{
@@ -248,16 +265,16 @@ updateUser(id){
 }
 @media (max-width: 768px) {
     #inputUser input {
-        display: block !important; /* Change display to block for smaller screens */
-        width: calc(100% - 20px) !important; /* Adjust width for smaller screens */
-        margin: 0 10px 10px 0 !important; /* Adjust margin for smaller screens */
+        display: block !important; 
+        width: calc(100% - 20px) !important; 
+        margin: 0 10px 10px 0 !important; 
     }
 }
 
 @media (max-width: 768px) {
     #inputUser {
-        margin-left: 10px; /* Move the input container to the left */
-        margin-right: 10px; /* Move the input container to the right */
+        margin-left: 10px; 
+        margin-right: 10px; 
     }
 }
 
@@ -289,12 +306,12 @@ updateUser(id){
     margin-top: 60px !important;
     margin-left: 1300px !important;
     margin-right: auto !important;
-    transition: margin-left 0.3s ease; /* Smooth transition for margin changes */
+    transition: margin-left 0.3s ease; 
 }
 
 @media (max-width: 1300px) {
     #logoutButton {
-        margin-left: auto !important; /* Center the button when screen size is smaller */
+        margin-left: auto !important; 
         margin-right: auto !important;
     }
 }
@@ -310,37 +327,36 @@ updateUser(id){
 
 .input-container input,
 .input-container select {
-  margin-right: 10px; /* Adjust the spacing between input fields */
-  margin-bottom: 10px; /* Adjust the vertical spacing between input fields */
+  margin-right: 10px; 
+  margin-bottom: 10px; 
 }
 
 .input-container {
     margin-top: 100px;
     margin-left: 210px;
     display: flex;
-    flex-wrap: wrap; /* Allow input fields to wrap */
+    flex-wrap: wrap; 
 }
 .input-container2 {
     margin-top: 100px;
-    margin-left: 120px; /* Assuming you wanted no left margin */
+    margin-left: 120px;
     padding: 10px !important;
     display: flex;
 }
 .input-container2 input {
-    width: 150px !important; /* Adjust the width to your desired value */
-    margin-right: 10px; /* Adjust the space between input tags */
-    /* You can adjust other styles like padding, margin, etc. here */
+    width: 150px !important;
+    margin-right: 10px; 
+    
 }
 .input-container input {
-    margin-right: 10px; /* Adjust spacing between inputs */
+    margin-right: 10px; 
 }
 .form-control {
-    width: 200px !important; /* Adjust the width as needed */
+    width: 200px !important;
 }
 #table {
     margin-top: 100px;
 }
-/* Style for the buttons */
 button {
     background-color: rgb(3, 168, 158);
     color: white;
