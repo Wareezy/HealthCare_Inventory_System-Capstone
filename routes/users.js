@@ -9,7 +9,6 @@ router
     //   .post(controller.addUsers)
       .post(controller.creatUser)
     //  .post(controller.loginUser)
-
 router
     .route('/:id')
         // .get(controller.getUser)

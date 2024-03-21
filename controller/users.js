@@ -10,7 +10,6 @@ getUsers:async(req,res)=>{
     res.send( await getUsers())
 },
 
-
 getUser:async(req,res)=>{
     res.send(await getUser(+req.params.id))
 },
