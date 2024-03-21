@@ -11,7 +11,8 @@ export default createStore({
     // this is the store
     inventory:[],
     users:[],
-    currentUser:null,
+    currentUser:null
+ 
   },
   getters: {
   },
@@ -23,7 +24,7 @@ export default createStore({
       state.users=data
     },
     setCurrentUser(state,data){
-      state.currentUser=data
+      state.currentUser=data;
     }
   },
   actions: {
@@ -189,9 +190,10 @@ async getProfile({ commit }, email) {
   try {
     let encode = $cookies.get('token');
     encode = encode.split('.')[1];
-    const decodedToken = JSON.parse(window.atob(encode));
-    console.log(decodedToken);
-    commit('setCurrentUser', decodedToken.currentUser); 
+    const {currentUser} = JSON.parse(window.atob(encode));
+    console.log(currentUser.userRole);
+    $cookies.set('userRole', currentUser.userRole)
+    commit('setCurrentUser', decodedToken.currentUser);
     // Update the currentUser state
   } catch (error) {
     console.error('Failed to retrieve user profile', error);
@@ -315,8 +317,9 @@ async loginUser({ commit }, currentUser) {
 
     if (data.token) {
       $cookies.set('token', data.token);
+      $cookies.set('userRole', data.user.userRole)
       // alert(data.msg);
-      await router.push('/admin');
+      await router.push('/products');
       Swal.fire({
         title: 'Login Successful',
         text: 'User has logged in successfully!',
@@ -367,6 +370,7 @@ async logOut(context){
     if (result.isConfirmed) {
       // Remove JWT token
       $cookies.remove('token');
+      $cookies.remove('userRole')
       // Redirect to login page
       router.push('/login');
       setTimeout(()=>{

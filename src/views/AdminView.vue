@@ -138,24 +138,24 @@ components:{
 },
   data() {
       return {
-          productName: '',
-          quantity: '',
-          category: '',          
-          imgUrl: '',
-          pricePerProduct: '',
-          expenses: '',
-          income: '',
+          productName: null,
+          quantity: null,
+          category: null,          
+          imgUrl: null,
+          pricePerProduct: null,
+          expenses: null,
+          income: null,
           loadingInventory: false
 
       }
   },
   data(){
     return{
-        firstName:'',
-        lastName:'',
-        userRole:'',
-        email:'',
-        password:'',
+        firstName:null,
+        lastName:null,
+        userRole:null,
+        email:null,
+        password:null,
         loadingUsers: false
     }
   },
@@ -240,7 +240,7 @@ updateUser(id){
 </script>
 
 
-<style>
+<style scoped>
 #inputUser {
     margin-left: auto; 
     margin-right: auto; 

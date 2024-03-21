@@ -52,11 +52,11 @@ import Swal from 'sweetalert2'
 export default {
     data(){
         return{
-            firstName:'',
-            lastName:'',
-            userRole:'',
-            email:'',
-            password:''
+            firstName:null,
+            lastName:null,
+            userRole:null,
+            email:null,
+            password:null
 
 
         }

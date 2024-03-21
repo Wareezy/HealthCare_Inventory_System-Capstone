@@ -1,5 +1,7 @@
 <template>
   <div>
+    <button v-if="$cookies.get('token')" id="logoutButton" @click="logOut" class="btn btn-danger btn-block mt-3">Log Out</button> 
+
     <h1 id="userHead">User</h1>
     <div class="row justify-content-center ">
       <div class="col-md-4">
@@ -50,6 +52,9 @@ export default {
     }
   },
   computed: {
+    logOut(){
+      this.$store.dispatch('logOut')
+    },
     userProfile() {
       return this.$store.state.currentUser;
     },
@@ -192,10 +197,18 @@ export default {
     border-radius: 12px;
 }
 #logoutButton {
-    background-color:red;
-    margin-top: 60px;
-    margin-right:-1350px;
+  background-color: red;
     border-radius: 12px;
+    margin-top: 60px !important;
+    margin-left: 1300px !important;
+    margin-right: auto !important;
+    transition: margin-left 0.3s ease; 
+}
+@media (max-width: 1300px) {
+    #logoutButton {
+        margin-left: auto !important; 
+        margin-right: auto !important;
+    }
 }
 #addButton2 {
     margin-top: 100px;
@@ -266,11 +279,21 @@ input[type="number"] {
   background-color: rgb(3, 168, 158);
     margin-top: 100px;
     border-radius: 12px;
+    transition: box-shadow 0.3s ease; /* Adding transition for smooth effect */
+
+}
+#buttonDel:hover {
+  box-shadow: 0 0 10px 3px rgba(3, 168, 158, 0.7); /* Adjust brightness by changing the rgba alpha value */
 }
 #buttonEdit {
   background-color: rgb(3, 168, 158);
     margin-top: 120px;
     border-radius: 12px;
     width: 80px;
+    transition: box-shadow 0.3s ease; /* Adding transition for smooth effect */
+
+}
+#buttonEdit:hover {
+  box-shadow: 0 0 10px 3px rgba(3, 168, 158, 0.7); /* Adjust brightness by changing the rgba alpha value */
 }
  </style>

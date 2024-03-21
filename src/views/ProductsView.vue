@@ -150,23 +150,27 @@ export default {
 #inputsChanging{
   /* margin-left:110px; */
 }
-#filterID{
-  background-color: rgb(3,168,158);
-  /* margin-left:130px; */
-  width:120px;
-  /* margin-top:100px */
+#filterID {
+  background-color: rgb(3, 168, 158);
+  width: 120px;
+  transition: box-shadow 0.3s ease; /* Adding transition for smooth effect */
 }
 
+#filterID:hover {
+  box-shadow: 0 0 10px 3px rgba(3, 168, 158, 0.7); /* Adjust brightness by changing the rgba alpha value */
+}
 #sortID{
 
-  /* margin-left:10px; */
   background-color: rgb(3,168,158);
   color:white;
-  /* margin-top:100px */
+  transition: box-shadow 0.3s ease; /* Adding transition for smooth effect */
 
 
 }
 
+#sortID:hover {
+  box-shadow: 0 0 10px 3px rgba(3, 168, 158, 0.7); /* Adjust brightness by changing the rgba alpha value */
+}
 .search-input {
   /* position: absolute; */
   width: 200px; 
