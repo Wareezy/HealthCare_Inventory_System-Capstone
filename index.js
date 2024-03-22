@@ -16,7 +16,7 @@ const PORT=process.env.PORT || 3306
 const app=express()
 
 app.use(cors({
-    origin:' http://localhost:8080',
+    origin:'https://capstone-inventorysystem.firebaseapp.com',
     credentials:true
 }))
 
