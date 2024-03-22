@@ -97,6 +97,7 @@ export default {
         password: this.password
       }
       this.$store.dispatch('updateUser', change);
+      $cookies.remove('token');
       this.$router.push('/login');
     }
   },
@@ -199,10 +200,16 @@ export default {
 #logoutButton {
   background-color: red;
     border-radius: 12px;
-    margin-top: 60px !important;
+    margin-top: 90px !important;
     margin-left: 1300px !important;
     margin-right: auto !important;
     transition: margin-left 0.3s ease; 
+    transition: box-shadow 0.3s ease; /* Adding transition for smooth effect */
+
+}
+#logoutButton:hover{
+    box-shadow: 0 0 10px 3px rgba(243, 53, 170, 0.7); /* Adjust brightness by changing the rgba alpha value */
+
 }
 @media (max-width: 1300px) {
     #logoutButton {

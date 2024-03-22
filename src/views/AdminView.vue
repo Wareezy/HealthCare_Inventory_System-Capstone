@@ -299,16 +299,28 @@ updateUser(id){
 #addButton {
     margin-top: 100px;
     border-radius: 12px;
+    background-color: rgb(3, 168, 158);
+    transition: box-shadow 0.3s ease; /* Adding transition for smooth effect */
+}
+#addButton:hover{
+    box-shadow: 0 0 10px 3px rgba(3, 168, 158, 0.7); /* Adjust brightness by changing the rgba alpha value */
+ 
 }
 #logoutButton {
     background-color: red;
     border-radius: 12px;
-    margin-top: 60px !important;
+    margin-top: 90px !important;
     margin-left: 1300px !important;
     margin-right: auto !important;
     transition: margin-left 0.3s ease; 
+    transition: box-shadow 0.3s ease; /* Adding transition for smooth effect */
+
 }
 
+#logoutButton:hover{
+    box-shadow: 0 0 10px 3px rgba(243, 53, 170, 0.7); /* Adjust brightness by changing the rgba alpha value */
+
+}
 @media (max-width: 1300px) {
     #logoutButton {
         margin-left: auto !important; 

@@ -14,8 +14,8 @@
             <br>
             {{ inventory[0].category }}
             <br>
-            <div id="buttMove">   
-              <button class="btn btn-primary">
+            <div >   
+              <button class="btn btn-primary" id="buttMove">
               <p class="money"> R{{ inventory[0].pricePerProduct }}</p>
             </button>
             <router-link to="/products">
@@ -32,12 +32,17 @@
       </div>
     </div>
     <div v-else>
-      <h1>No product selected</h1>
+      <h1><spinner-comp/></h1>
     </div>  </div>
 </template>
 
 <script>
+import spinnerComp from '@/components/spinnerComp.vue';
 export default {
+  components:{
+    spinnerComp
+  }
+  ,
   computed: {
     inventory() {
       return this.$store.state.inventory;
@@ -51,16 +56,31 @@ export default {
 
 <style>
 #buttMove{
-margin-top:40px;
+margin-top:12px !important;
+height:55px;
 text-align: center !important;
+background-color: rgb(3, 168, 158);
+transition: box-shadow 0.3s ease; /* Adding transition for smooth effect */
+
 }
+#buttMove:hover{
+  box-shadow: 0 0 10px 3px rgba(3, 168, 158, 0.7); /* Adjust brightness by changing the rgba alpha value */
+
+}
+
 .product-details-container {
   background-color: white; 
   padding: 20px; 
 }
 #backButton{
+  background-color:rgb(3, 168, 158) ;
   width:100px;
   height:53px;
   margin-left:100px;
+  transition: box-shadow 0.3s ease;
+}
+#backButton:hover{
+  box-shadow: 0 0 10px 3px rgba(3, 168, 158, 0.7); /* Adjust brightness by changing the rgba alpha value */
+
 }
 </style>

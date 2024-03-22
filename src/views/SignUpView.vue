@@ -21,7 +21,7 @@
 
             <select name="userRole" v-model="userRole" class="form-control mb-3 glowing-input">
                 <option value="" disabled selected>Select User Role</option>
-                <option value="admin">admin</option>
+                <!-- <option value="admin">admin</option> -->
                 <option value="user">user</option>
             </select>
 

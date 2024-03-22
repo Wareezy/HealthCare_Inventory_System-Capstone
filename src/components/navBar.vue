@@ -26,7 +26,7 @@
             <li class="nav-item">
               <router-link v-if="!$cookies.get('token')" class="nav-link" to="/signup">SignUp</router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" v-if="$cookies.get('token')">
               <router-link class="nav-link" to="/products">Products</router-link>
             </li>
             <li class="nav-item" >
@@ -47,21 +47,28 @@
 </template>
 
 <script>
-
 export default {
-computed:{
-  isAdmin(){
-    return $cookies.get('userRole')
+  computed: {
+    isAdmin() {
+      return $cookies.get('userRole');
+    }
   }
-}
 }
 </script>
 
 <style scoped>
 .navbar-green {
-  background-color: rgb(3,168,158);
+  background-color: rgb(3, 168, 158);
   padding-bottom: -20px !important;
 }
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* Adjust z-index as needed */
+}
+
 nav a {
   display: inline-block;
   position: relative;
@@ -71,9 +78,11 @@ nav a {
   margin: 0 10px;
   transition: color 0.3s ease-in-out;
 }
+
 nav a.router-link-active {
-  color: white !important;
+  color: pink !important;
 }
+
 nav a::after {
   content: '';
   position: absolute;
@@ -86,10 +95,12 @@ nav a::after {
   transform-origin: bottom right;
   transition: transform 0.25s ease-out;
 }
+
 nav a:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
+
 @keyframes pulsate {
   0% {
     transform: scale(1);
@@ -101,15 +112,18 @@ nav a:hover::after {
     transform: scale(1);
   }
 }
+
 #logo {
   width: 50px;
   height: 50px;
   animation: pulsate 2s infinite;
 }
+
 #logoImg1 {
   width: 51px;
   height: 47px;
 }
+
 #logoImg2 {
   width: 45px;
   height: 45px;

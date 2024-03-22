@@ -3,8 +3,8 @@ import axios from 'axios'
 import router from '@/router'
 import Swal from 'sweetalert2'
 import sweet from 'sweetalert'
-// const BASE_URL="https://healthcare-inventory-system-capstone.onrender.com"
-const BASE_URL="http://localhost:3309"
+const BASE_URL="https://healthcare-inventory-system-capstone.onrender.com"
+// const BASE_URL="http://localhost:3309"
 axios.defaults.withCredentials=true
 export default createStore({
   state: {
@@ -335,7 +335,7 @@ async loginUser({ commit }, currentUser) {
     } else {
       Swal.fire({
         title: 'Error',
-        text: 'Failed to login',
+        text: 'Failed to login, password or email is incorrect',
         icon: 'error',
         timer: 1000
       });

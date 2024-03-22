@@ -11,11 +11,11 @@
           </div>
           <div>
             <div class="d-flex justify-content-center">
-              <router-link to="/login">
+              <router-link to="/login" v-if="!$cookies.get('token')">
                 <button id="buttonLogin" class="align-item-center">Login</button>
               </router-link>
 
-              <router-link to="/signup">
+              <router-link to="/signup" v-if="!$cookies.get('token')">
                 <button id="buttonSignUp" class="align-item-center">SignUp</button>
               </router-link>
             </div>

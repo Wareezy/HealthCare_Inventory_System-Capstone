@@ -73,6 +73,7 @@ export default {
 }
 
 #cardbody{
+  margin-top:130px !important;
   max-width: 400px; 
   margin: 0 auto;
   max-height:700px;

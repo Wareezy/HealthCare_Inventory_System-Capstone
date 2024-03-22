@@ -63,6 +63,7 @@ export default {
 
   .glowing-bg {
     animation: glowing 2s infinite alternate;
+    
   }
 #sliderImage{
   margin-top:150px;
@@ -76,6 +77,10 @@ export default {
   transform: translateX(-50%); 
 }
 
+#aboutCard{
+  margin-top:110px;
+
+}
 .carousel-item img {
     margin: 0 auto; 
     display: block; 
