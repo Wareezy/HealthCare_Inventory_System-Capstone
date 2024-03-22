@@ -26,8 +26,8 @@ app.use(express.static('views'))
 
 // app.use(cookieParser())
 
-app.use('/inventory',authenticate,inventoryRouter)
-app.use('/users',authenticate,userRouter)
+app.use('/inventory',inventoryRouter)
+app.use('/users',userRouter)
 app.use('/login',auth,loginRouter)
 // app.use(authenticate)
 // app.use(errorHandling)
